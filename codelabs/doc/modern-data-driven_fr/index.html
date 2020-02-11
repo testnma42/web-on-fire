@@ -138,6 +138,28 @@ c. Enfin, rafra&#xEE;chissez la page &#xE0; nouveau.</li>
 
     </google-codelab-step>
   
+    <google-codelab-step label="Informer l'utilisateur de l'enregistement">
+
+    <p>La potentialit&#xE9; d&apos;une perte de donn&#xE9;es est toujours source de stress pour vos utilisateurs.</p><aside class="special">
+  Votre serviteur en sait quelque chose, &#xE9;tant donn&#xE9; qu&apos;il &#xE9;crit actuellement ce chapitre pour la seconde fois, suite &#xE0; un git checkout malencontreux &#x1F613;. Ironique n&apos;est-ce pas ?
+</aside><p>C&apos;est pourquoi il est indispensable de prendre en compte l&apos;int&#xE9;gralit&#xE9; de leur parcours, de la cr&#xE9;ation de donn&#xE9;es hors ligne (et donc, leur stockage localement) &#xE0; l&apos;enregistrement de celles ci c&#xF4;t&#xE9; serveur une fois la connexion retrouv&#xE9;e.</p><aside class="warning">
+  Notez bien que sans l&apos;usage des outils de d&#xE9;veloppement et l&apos;acc&#xE8;s au serveur, vous auriez &#xE9;t&#xE9; bien incapable de dire, &#xE0; l&apos;&#xE9;tape pr&#xE9;c&#xE9;dente, si vos &#xE9;v&#xE8;nements avaient bien &#xE9;t&#xE9; enregistr&#xE9;s.
+</aside><p>Ici, notre application est plut&#xF4;t sommaire. Nous nous contenterons donc d&apos;informer l&apos;utisateur de l&apos;enregistrement de ces donn&#xE9;es via une notification.</p><h3 id="afficher-une-notification">Afficher une notification</h3><p>Ajoutez le code suivant &#xE0; <strong>app/sw.js</strong> :</p><pre><code class="language-javascript">const showNotification = () =&gt; {
+  self.registration.showNotification(&apos;Background sync success!&apos;, {
+    body: &apos;&#x1F389;`&#x1F389;`&#x1F389;`&apos;
+  });
+};</code></pre><p>Comme son nom l&apos;indique, cette fonction fait usage de la Notification API pour afficher une notification &quot;syst&#xE8;me&quot;. Rien de plus.</p><p>Pour y faire appel &#xE0; la reception d&apos;un sync event, ajoutez une option <code>onSync</code> &#xE0; notre BackgroundSyncPlugin, comme suit :</p><pre><code class="language-javascript">const bgSyncPlugin = new BackgroundSyncPlugin(&apos;dashboardr-queue&apos;, {
+  onSync: showNotification
+});</code></pre><h3 id="tester-lapplication-1">Tester l&apos;application</h3><p>R&#xE9;p&#xE9;tez maintenant les m&#xEA;mes op&#xE9;rations qu&apos;&#xE0; l&apos;&#xE9;tape pr&#xE9;c&#xE9;dente. Rechargez l&apos;application, activez le service worker via un skipInstall, rechargez &#xE0; nouveau, puis passez hors (en coupant le serveur et la connection r&#xE9;seau de votre machine). Vous pouvez &#xE0; pr&#xE9;sent cr&#xE9;er un nouvel &#xE9;v&#xE8;nement.</p><p>R&#xE9;activez votre connection (serveur, puis machine). Vous verrez alors appara&#xEE;tre la notification.</p><p>Mais il semblerait que nous ayons cr&#xE9;&#xE9; une notification trompeuse. Votre &#xE9;v&#xE8;nement n&apos;a pas &#xE9;t&#xE9; enregistr&#xE9; ! Explorez les devtools pour vous en assurer.</p><h3 id="explication-1">Explication</h3><p>Par d&#xE9;faut, un BackgroundSyncPlugin a un comportement des plus simple. Il cr&#xE9;&#xE9; un file (queue) par d&#xE9;faut, stocke toutes les appels correspondant &#xE0; la route &#xE0; laquelle il a &#xE9;t&#xE9; associ&#xE9; dans celle-ci quand ils &#xE9;chouent, et les rejouent tous &#xE0; la reception d&apos;un sync event.</p><p>Mais l&apos;option <code>onSync</code> n&apos;a pas vocation &#xE0; n&apos;&#xEA;tre qu&apos;une simple callback en adition de ce comportement. Elle le remplace.</p><p>Ainsi, quand nous avons associ&#xE9; <code>showNotification</code> au <code>onSync</code> du plugin, nous n&apos;avons pas ajout&#xE9; un comportement.
+Nous l&apos;avons remplac&#xE9;.</p><h3 id="customiser-le-comportement-de-workbox">Customiser le comportement de Workbox</h3><p>Pour r&#xE9;parer cette erreur, nous devons reproduire le comportement par d&#xE9;faut du plugin, et donc rejouer tous les appels dans sa file.</p><p>Editez <code>showNotification</code> pour obtenir le r&#xE9;sultat suivant :</p><pre><code class="language-javascript">const showNotification = ({ queue }) =&gt; {
+  queue.replayRequests();
+  self.registration.showNotification(&apos;Background sync success!&apos;, {
+    body: &apos;&#x1F389;`&#x1F389;`&#x1F389;`&apos;
+  });
+};</code></pre><p>Enfin, r&#xE9;-effectuez le test de l&apos;application pr&#xE9;c&#xE9;dent, et gardez un &#x153;il sur la console et &quot;Network&quot;. Votre appel POST sur /api/add sera cette fois-ci rejou&#xE9; correctement une fois la connexion retrouv&#xE9;e, et votre &#xE9;v&#xE8;nement bien enregistr&#xE9;.</p>
+
+    </google-codelab-step>
+  
 
       </google-codelab>
 
