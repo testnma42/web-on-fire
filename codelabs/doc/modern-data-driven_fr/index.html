@@ -6,7 +6,7 @@
       <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
       <meta name="theme-color" content="#4F7DC9">
       <meta charset="UTF-8">
-      <title>open-wc codelab | PWA orientée données et capacités modernes</title>
+      <title>WoF codelab | PWA orientée données et capacités modernes</title>
       <link rel="icon" type="image/png" href="/favicon.png">
       <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
       <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -21,11 +21,23 @@
         .center {
           text-align: center;
         }
+        aside.info {
+          background: #f1f3f4;
+          border: none !important;
+          color: #606165;
+        }
+        aside.info:last-child {
+          margin-top: 4em !important;
+          margin-bottom: 0 !important;
+        }
+        aside.info a {
+          color: #34a4ff !important;
+        }
       </style>
     </head>
 
     <body>
-      <google-codelab title="PWA orientée données et capacités modernes" feedback-link="https://github.com/open-wc/open-wc/issues">
+      <google-codelab title="PWA orientée données et capacités modernes" feedback-link="https://github.com/noelmace/web-on-fire/issues">
 
         
     <google-codelab-step label="Introduction">
@@ -34,7 +46,7 @@
 <li>Comment utiliser la synchronisation en arri&#xE8;re-plan (background sync) pour mettre &#xE0; jour l&apos;application, m&#xEA;me lorsque celle-ci n&apos;est pas affich&#xE9;e.</li>
 </ul><h3 id="pr&#xE9;-requis">Pr&#xE9;-requis</h3><p>Ce codelab requiert que vous soyez d&#xE9;j&#xE0; familier avec les &#xE9;l&#xE9;ments de base du d&#xE9;veloppement Web.</p><p>En particulier, il est recommand&#xE9; d&apos;avoir une certaine ma&#xEE;trise d&apos;HTML, de CSS et de JavaScript (i.e. ES2019),
 et d&apos;avoir au moins une fois contribu&#xE9; au d&#xE9;veloppement d&apos;une Web App (peu importe le framework ou la librairie utilis&#xE9;).</p><h3 id="important">IMPORTANT</h3><aside class="warning">
-  <b>Dans le cas o&#xF9; vous assistiez &#xE0; une version &quot;live&quot; de ce codelab (durant une conf&#xE9;rence, comme le Devfest Paris 2020 par exemple), il vous est fortement recommand&#xE9; d&apos;effectuer les &#xE9;tapes 2 et 3 (installations) en amont !</b>
+  <b>Dans le cas o&#xF9; vous assistiez &#xE0; une version &quot;live&quot; de ce codelab (durant une conf&#xE9;rence, comme le DevFest Paris 2020 par exemple), il vous est fortement recommand&#xE9; d&apos;effectuer les &#xE9;tapes 2 et 3 (installations) en amont !</b>
 </aside><h3 id="logiciels-indispensables">Logiciels indispensables</h3><ul>
 <li>Un IDE / un &#xE9;diteur de code ou de texte<ul>
 <li>recommandation : <a href="https://code.visualstudio.com/">Download Visual Studio Code</a></li>
@@ -42,7 +54,7 @@ et d&apos;avoir au moins une fois contribu&#xE9; au d&#xE9;veloppement d&apos;un
 </li>
 <li>La derni&#xE8;re version de Chrome<ul>
 <li><a href="https://www.google.com/chrome/canary/">Chrome Canary</a></li>
-<li>ou <a href="https://www.google.com/chrome/dev/">Chome Dev</a> si vous ne pouvez install la version Canary (eg sur Linux)</li>
+<li>ou <a href="https://www.google.com/chrome/dev/">Chrome Dev</a> si vous ne pouvez install la version Canary (eg sur Linux)</li>
 <li>(optionnel, en suppl&#xE9;ment) <a href="https://www.mozilla.org/fr/firefox/channel/desktop/#nightly">Firefox</a> Nightly ou Developer Edition</li>
 </ul>
 </li>
@@ -54,7 +66,7 @@ et d&apos;avoir au moins une fois contribu&#xE9; au d&#xE9;veloppement d&apos;un
 <li>si vous utilisez Linux, vous pourrez au besoin utiliser une <a href="https://developer.microsoft.com/en-us/windows/downloads/virtual-machines/">VM</a>, mais vous devrez &#xE9;galement y installer la derni&#xE8;re version de Chrome (cf. plus haut), et vous assurer que celle-ci peut acc&#xE9;der au syst&#xE8;me h&#xF4;te via un r&#xE9;seau virtuel (HTTP)</li>
 </ul>
 </li>
-<li>un smartphone Android, un cable usb et <a href="https://developer.android.com/studio">Android Studio</a></li>
+<li>un smartphone Android &quot;r&#xE9;cent&quot; avec Chrome, <a href="https://play.google.com/store/apps/details?id=com.chrome.canary&amp;hl=en">Chrome Canary</a>, <a href="https://play.google.com/store/apps/details?id=org.mozilla.fennec_aurora&amp;hl=en_US">Firefox Nightly</a>, et un cable usb</li>
 </ul>
 
     </google-codelab-step>
@@ -62,15 +74,17 @@ et d&apos;avoir au moins une fois contribu&#xE9; au d&#xE9;veloppement d&apos;un
     <google-codelab-step label="Mise en place">
 
     <h3 id="projet">Projet</h3><p>Clonez le code de d&#xE9;marrage depuis GitHub via la commande suivante :</p><pre><code class="language-bash">git clone https://github.com/noelmace/data-driven-pwa.git</code></pre><p>Vous pouvez &#xE9;galement le t&#xE9;l&#xE9;charger au format zip <a href="https://github.com/noelmace/data-driven-pwa/archive/master.zip">en cliquant ici</a>.</p><h3 id="d&#xE9;pendances">D&#xE9;pendances</h3><p>Rendez-vous &#xE0; la racine du projet via la commande :</p><pre><code class="language-bash">cd data-driven-pwa</code></pre><p>Installez ensuite les d&#xE9;pendances du projet en lan&#xE7;ant la commande suivante :</p><pre><code class="language-bash">npm install</code></pre><aside class="special">
-  Cette commande lance l&apos;installation des outils de d&#xE9;veloppement depuis la racine du d&#xE9;p&#xF4;t, incluant [Lerna](https://lerna.js.org/). Ce dernier est ensuite utilis&#xE9; pour &#xE9;galement installer les d&#xE9;pendances de tous les sous-projets, &#xE0; partir desquels vous effectuerez les &#xE9;tapes suivantes. Par conc&#xE9;quent, <b>il ne vous sera pas n&#xE9;cessaire d&apos;effectuer un `npm install` pour chacun de ces projets</b>.
+  Cette commande lance l&apos;installation des outils de d&#xE9;veloppement depuis la racine du d&#xE9;p&#xF4;t, incluant [Lerna](https://lerna.js.org/). Ce dernier est ensuite utilis&#xE9; pour &#xE9;galement installer les d&#xE9;pendances de tous les sous-projets, &#xE0; partir desquels vous effectuerez les &#xE9;tapes suivantes. Par cons&#xE9;quent, <b>il ne vous sera pas n&#xE9;cessaire d&apos;effectuer un `npm install` pour chacun de ces projets</b>.
 </aside>
 
     </google-codelab-step>
   
     <google-codelab-step label="Premier contact avec l'application">
 
-    <p>Via le terminal, rendez-vous dans le dossier &quot;project&quot; o&#xF9; se situent les &#xE9;l&#xE9;ments de base du projet :</p><pre><code class="language-bash">cd project</code></pre><p>&#xC0; partir de ce dossier, d&#xE9;marrez le serveur de d&#xE9;veloppement pour pouvoir utiliser et tester l&apos;application :</p><pre><code class="language-bash">npm run --silent start</code></pre><p>Ouvrez l&apos;application en entrant l&apos;url <a href="http://localhost:8081">localhost:8081</a> dans votre navigateur web.</p><p>L&apos;application vous demande alors une autorisation pour pouvoir afficher des notifications. Cliquez sur &quot;Autoriser&quot; ou &quot;Allow&quot; pour l&apos;accepter.</p><p><img src="https://codelabs.developers.google.com/codelabs/workbox-indexeddb/img/9ca6ac4aededfba6.png" alt="Autoriser les notifications"> <br><em>Cr&#xE9;dit image: &#xA9;&#xFE0F; Google Inc.</em></p><aside class="special">
+    <p>Via le terminal, rendez-vous dans le dossier &quot;project&quot; o&#xF9; se situent les &#xE9;l&#xE9;ments de base du projet :</p><pre><code class="language-bash">cd project</code></pre><p>&#xC0; partir de ce dossier, d&#xE9;marrez le serveur de d&#xE9;veloppement pour pouvoir utiliser et tester l&apos;application :</p><pre><code class="language-bash">npm run --silent start</code></pre><p>Ouvrez l&apos;application en entrant l&apos;url <a href="http://localhost:8081">localhost:8081</a> dans votre navigateur web.</p><p>L&apos;application vous demande alors une autorisation pour pouvoir afficher des notifications. Cliquez sur &quot;Autoriser&quot; ou &quot;Allow&quot; pour l&apos;accepter.</p><p><img src="https://codelabs.developers.google.com/codelabs/workbox-indexeddb/img/9ca6ac4aededfba6.png" alt="Autoriser les notifications"> \</p><aside class="special">
   Cette application est issue d&apos;un codelab de Google intitul&#xE9; <a href="https://codelabs.developers.google.com/codelabs/workbox-indexeddb/#2" target="_blank" rel="noopener noreferrer"><i>Build an offline-first, data-driven PWA</i></a>.
+</aside><aside class="info">
+  Portions of this page are modifications based on work created and <a href="/readme/policies/">shared by Google</a> and used according to terms described in the <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons 4.0 Attribution License</a>.
 </aside>
 
     </google-codelab-step>
@@ -89,7 +103,7 @@ npm run --silent start</code></pre><p>Retournez dans le navigateur, et mettez &#
 <li>Enfin, rafra&#xEE;chissez la page &#xE0; nouveau</li>
 </ol><aside class="tip">
   Notez bien ces &#xE9;tapes. Vous devrez les reproduire souvent par la suite.
-</aside><p>Enfin, stoppez le serveur pour simuler une coupure r&#xE9;seau, puis rechargez l&apos;application dans le navigateur. Vous constaterez alors que l&apos;application semble fonctionner &#xE0; l&apos;identique.</p><p>Dans les developer tools de Chrome, s&#xE9;lectionnez la section <em>IndexedDB</em>, puis la base de donn&#xE9;e <em>dashboardr</em>. Celle-ci permet de stocker localement les &quot;&#xE9;v&#xE8;nements&quot; pour une consultation hors ligne.</p><p>L&apos;application dont vous disposez &#xE0; pr&#xE9;sent est bien une PWA enti&#xE8;rement disponible hors-ligne !</p><h3 id="explication">Explication</h3><p>Sans d&#xE9;veloppement sp&#xE9;cifique, quand un utilisateur tente d&apos;acc&#xE9;der &#xE0; une Web App en &#xE9;tant d&#xE9;connect&#xE9;, un message &quot;Offline&quot; est affich&#xE9;, emp&#xE9;chant toute utilisation de l&apos;application.</p><p class="center">
+</aside><p>Enfin, stoppez le serveur pour simuler une coupure r&#xE9;seau, puis rechargez l&apos;application dans le navigateur. Vous constaterez alors que l&apos;application semble fonctionner &#xE0; l&apos;identique.</p><p>Dans les developer tools de Chrome, s&#xE9;lectionnez la section <em>IndexedDB</em>, puis la base de donn&#xE9;e <em>dashboard</em>. Celle-ci permet de stocker localement les &quot;&#xE9;v&#xE8;nements&quot; pour une consultation hors ligne.</p><p>L&apos;application dont vous disposez &#xE0; pr&#xE9;sent est bien une PWA enti&#xE8;rement disponible hors-ligne !</p><h3 id="explication">Explication</h3><p>Sans d&#xE9;veloppement sp&#xE9;cifique, quand un utilisateur tente d&apos;acc&#xE9;der &#xE0; une Web App en &#xE9;tant d&#xE9;connect&#xE9;, un message &quot;Offline&quot; est affich&#xE9;, emp&#xEA;chant toute utilisation de l&apos;application.</p><p class="center">
   <img src="./assets/firefox-offline.png" alt="firefox is offline" style="margin: 1rem">
 </p><p>Workbox a permis, en mettant en cache le App Shell, de ne jamais montrer ce type de message &#xE0; un utilisateur retournant sur l&apos;application.</p><p>Mais une application n&apos;est rien sans donn&#xE9;es !
 Nous avons donc utilis&#xE9; IndexDB pour mettre ces donn&#xE9;es en cache (ici, des &quot;events&quot;), et permettre de les consulter m&#xEA;me en &#xE9;tant hors-ligne.</p><p>Un probl&#xE8;me persiste cependant : comme le serveur n&apos;est bien &#xE9;videmment pas disponible quand l&apos;utilisateur est hors ligne, tous les &quot;events&quot; qu&apos;il aura alors cr&#xE9;&#xE9; n&apos;auront &#xE9;t&#xE9; stock&#xE9;s que localement. Ils seront donc perdus tr&#xE8;s rapidement !</p><p>Nous allons dans le chapitre suivant r&#xE9;soudre ce probl&#xE8;me via workbox-background-sync, et donc la Background Sync API.</p><h3 id="pas-&#xE0;-pas-optionnel">Pas-&#xE0;-pas (optionnel)</h3><p>Vous pouvez &#xE9;galement suivre les <a href="https://codelabs.developers.google.com/codelabs/workbox-indexeddb/#3" target="_blank" rel="noopener noreferrer">&#xE9;tapes 4 &#xE0; 7 du codelab Google</a> pour mieux comprendre en d&#xE9;tails ces fonctionnalit&#xE9;s.</p><p>Pour gagner du temps, les &quot;step&quot; correspondant ont &#xE9;t&#xE9; cr&#xE9;&#xE9;s pour la commande &quot;goto&quot;. Leurs num&#xE9;ros suivent le format <code>4-&lt;step google&gt;</code> :</p><pre><code class="language-bash">npm run goto --step=4-4
@@ -97,7 +111,9 @@ npm run goto --step=4-5
 npm run goto --step=4-6
 npm run goto --step=4-7</code></pre><aside class="warning">
   Si vous d&#xE9;cidez d&apos;&#xE9;crire ce code vous m&#xEA;me, assurez vous d&apos;utiliser la derni&#xE8;re version de Workbox (5.0.0) au lieu de celle indiqu&#xE9;e dans le premier code d&apos;exemple (3.5.0).
-</aside><pre><code class="language-javascript">importScripts(&apos;https://storage.googleapis.com/workbox-cdn/releases/5.0.0/workbox-sw.js&apos;);</code></pre>
+</aside><pre><code class="language-javascript">importScripts(&apos;https://storage.googleapis.com/workbox-cdn/releases/5.0.0/workbox-sw.js&apos;);</code></pre><aside class="info">
+  Portions of this page are modifications based on work created and <a href="/readme/policies/">shared by Google</a> and used according to terms described in the <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons 4.0 Attribution License</a>.
+</aside>
 
     </google-codelab-step>
   
@@ -116,7 +132,7 @@ const networkWithBackgroundSync = new NetworkOnly({
 });
 
 registerRoute(/\/api\/add/, networkWithBackgroundSync, &apos;POST&apos;);</code></pre><p>Enregistrez le fichier, et relancez le serveur :</p><pre><code class="language-bash">npm run --silent start</code></pre><h3 id="tester-lapplication">Tester l&apos;application</h3><p>Pour voir le r&#xE9;sultat de cette nouvelle fonctionnalit&#xE9;, effectuez une nouvelle mise &#xE0; jour de l&apos;application (refresh - skipWaiting - refresh) et stopper le serveur.</p><p>D&#xE9;connectez votre ordinateur du r&#xE9;seau <strong>pour de vrais</strong> (wifi et cable).</p><aside class="warning">
-  Le background sync se basant sur le <i>v&#xE9;ritable</i> statut de la connection r&#xE9;seau de votre syst&#xE8;me, il est indispensable d&apos;activer et d&#xE9;sactiver votre ordinateur pour ce chapitre et le suivant. <b>Le trottling via les DevTools et l&apos;arr&#xEA;t de serveur ne suffiront pas.</b>
+  Le background sync se basant sur le <i>v&#xE9;ritable</i> statut de la connection r&#xE9;seau de votre syst&#xE8;me, il est indispensable d&apos;activer et d&#xE9;sactiver votre ordinateur pour ce chapitre et le suivant. <b>Le throttling via les DevTools et l&apos;arr&#xEA;t de serveur ne suffiront pas.</b>
 </aside><p>Dans <code>Developer Tools &gt; Background Sync</code>, d&#xE9;marrez la capture des &#xE9;v&#xE8;nements Background Sync.</p><p><img src="./assets/record-bgsync.png" alt="capture: record bgsync in Chrome"></p><p>Cr&#xE9;er un nouvel &apos;event&apos; via le formulaire en bas de l&apos;application.</p><p>En allant &#xE0; l&apos;onglet &apos;Network&apos; des devtools, vous pourrez constater qu&apos;une requ&#xEA;te vers <code>/api/add</code> a &#xE9;chou&#xE9;e.</p><p><img src="./assets/5-failed-request.png" alt="capture: request failed"></p><p>Dans le m&#xEA;me temps, une nouvelle base <code>workbox-background-sync</code> a &#xE9;t&#xE9; cr&#xE9;&#xE9;e, contenant une request vers <code>http://localhost:8081/api/add</code> (<code>requestData.url</code>) (cf. <code>Developer Tools &gt; Application &gt; IndexedDB</code>) et un &#xE9;v&#xE8;nement &quot;Registered Sync&quot; est visible dans &quot;Background Sync&quot;.</p><aside class="notice">
   Pensez &#xE0; rafra&#xEE;chir IndexedDB (click droit) si rien n&apos;appara&#xEE;t.
 </aside><p>Enfin, il est temps de repasser en ligne :</p><ol>
@@ -126,28 +142,199 @@ registerRoute(/\/api\/add/, networkWithBackgroundSync, &apos;POST&apos;);</code>
 </ol><p>De nouveaux &#xE9;v&#xE8;nements Background Sync sont &#xE0; pr&#xE9;sent visible dans les devtools.</p><p><img src="./assets/bgsync-events.png" alt="capture: bgsync events"></p><p>Cela a permis &#xE0; votre service worker de retenter l&apos;appel &#xE0; <code>/api/add</code>, avec succ&#xE8;s cette fois, comme indiqu&#xE9; dans &quot;Networks&quot;.</p><p>Bien entendu, la requ&#xEA;te &#xE0; du m&#xEA;me coup &#xE9;t&#xE9; supprim&#xE9;e de la base IndexedDB.</p><p>Enfin, rechargez la page : vous constaterez que votre nouvel &#xE9;v&#xE8;nement a bien &#xE9;t&#xE9; enregistr&#xE9;, et est donc toujours pr&#xE9;sent.</p><aside class="special">
   Vos nouveaux &#xE9;v&#xE8;nements ont m&#xEA;me &#xE9;t&#xE9; enregistr&#xE9;s par le serveur dans <code>server-data/events.json</code>.
 </aside><aside class="warning">
-  Le background sync sous Chrome <a href="https://github.com/GoogleChrome/workbox/issues/1896">peut parfois &#xEA;tre capricieux</a>. Si un &quot;Registered Sync&quot; n&apos;apparait pas apr&#xE8;s que vous ayez cr&#xE9;&#xE9; votre &#xE9;v&#xE8;nement, il s&apos;agit sans doute d&apos;un bug ind&#xE9;pendant de l&apos;application. Fermez compl&#xE8;tement Chrome (y compris les processus en arri&#xE8;re plan), red&#xE9;marrez le, et retentez l&apos;op&#xE9;ration apr&#xE8;s avoir supprim&#xE9; toutes les donn&#xE9;es de l&apos;application (Clear Storage &gt; Clear site data).
+  Le background sync sous Chrome <a href="https://github.com/GoogleChrome/workbox/issues/1896">peut parfois &#xEA;tre capricieux</a>. Si un &quot;Registered Sync&quot; n&apos;appara&#xEE;t pas apr&#xE8;s que vous ayez cr&#xE9;&#xE9; votre &#xE9;v&#xE8;nement, il s&apos;agit sans doute d&apos;un bug ind&#xE9;pendant de l&apos;application. Fermez compl&#xE8;tement Chrome (y compris les processus en arri&#xE8;re plan), red&#xE9;marrez le, et retentez l&apos;op&#xE9;ration apr&#xE8;s avoir supprim&#xE9; toutes les donn&#xE9;es de l&apos;application (Clear Storage &gt; Clear site data).
+</aside><aside class="info">
+  Portions of this page are modifications based on work created and <a href="/readme/policies/">shared by Google</a> and used according to terms described in the <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons 4.0 Attribution License</a>.
 </aside>
 
     </google-codelab-step>
   
-    <google-codelab-step label="Informer l'utilisateur de l'enregistement">
+    <google-codelab-step label="Informer l'utilisateur de l'enregistrement">
 
     <p>La potentialit&#xE9; d&apos;une perte de donn&#xE9;es est toujours source de stress pour vos utilisateurs. <em>Votre serviteur en sait quelque chose, &#xE9;tant donn&#xE9; qu&apos;il &#xE9;crit actuellement ce chapitre pour la seconde fois, suite &#xE0; un git checkout malencontreux &#x1F613;. Ironique n&apos;est-ce pas ?</em></p><p>C&apos;est pourquoi il est indispensable de prendre en compte l&apos;int&#xE9;gralit&#xE9; de leur parcours, de la cr&#xE9;ation de donn&#xE9;es hors ligne (et donc, leur stockage localement) &#xE0; l&apos;enregistrement de celles ci c&#xF4;t&#xE9; serveur une fois la connexion retrouv&#xE9;e.</p><aside class="warning">
   Notez bien que sans l&apos;usage des outils de d&#xE9;veloppement et l&apos;acc&#xE8;s au serveur, vous auriez &#xE9;t&#xE9; bien incapable de dire, &#xE0; l&apos;&#xE9;tape pr&#xE9;c&#xE9;dente, si vos &#xE9;v&#xE8;nements avaient bien &#xE9;t&#xE9; enregistr&#xE9;s.
-</aside><p>Ici, notre application est plut&#xF4;t sommaire. Nous nous contenterons donc d&apos;informer l&apos;utisateur de l&apos;enregistrement de ces donn&#xE9;es via une notification.</p><h3 id="afficher-une-notification">Afficher une notification</h3><p>Ajoutez le code suivant &#xE0; <strong>app/sw.js</strong> :</p><pre><code class="language-javascript">const showNotification = () =&gt; {
+</aside><p>Ici, notre application est plut&#xF4;t sommaire. Nous nous contenterons donc d&apos;informer l&apos;utilisateur de l&apos;enregistrement de ces donn&#xE9;es via une notification.</p><h3 id="afficher-une-notification">Afficher une notification</h3><p>Ajoutez le code suivant &#xE0; <strong>app/sw.js</strong> :</p><pre><code class="language-javascript">const showNotification = () =&gt; {
   self.registration.showNotification(&apos;Background sync success!&apos;, {
     body: &apos;&#x1F389;`&#x1F389;`&#x1F389;`&apos;
   });
 };</code></pre><p>Comme son nom l&apos;indique, cette fonction fait usage de la Notification API pour afficher une notification &quot;syst&#xE8;me&quot;. Rien de plus.</p><p>Pour y faire appel &#xE0; la reception d&apos;un sync event, ajoutez une option <code>onSync</code> &#xE0; notre BackgroundSyncPlugin, comme suit :</p><pre><code class="language-javascript">const bgSyncPlugin = new BackgroundSyncPlugin(&apos;dashboardr-queue&apos;, {
   onSync: showNotification
-});</code></pre><h3 id="tester-lapplication-1">Tester l&apos;application</h3><p>R&#xE9;p&#xE9;tez maintenant les m&#xEA;mes op&#xE9;rations qu&apos;&#xE0; l&apos;&#xE9;tape pr&#xE9;c&#xE9;dente. Rechargez l&apos;application, activez le service worker via un skipInstall, rechargez &#xE0; nouveau, puis passez hors (en coupant le serveur et la connection r&#xE9;seau de votre machine). Vous pouvez &#xE0; pr&#xE9;sent cr&#xE9;er un nouvel &#xE9;v&#xE8;nement.</p><p>R&#xE9;activez votre connection (serveur, puis machine). Vous verrez alors appara&#xEE;tre la notification.</p><p>Mais il semblerait que nous ayons cr&#xE9;&#xE9; une notification trompeuse. Votre &#xE9;v&#xE8;nement n&apos;a pas &#xE9;t&#xE9; enregistr&#xE9; ! Explorez les devtools pour vous en assurer.</p><h3 id="explication-1">Explication</h3><p>Par d&#xE9;faut, un BackgroundSyncPlugin a un comportement des plus simple. Il cr&#xE9;&#xE9; un file (queue) par d&#xE9;faut, stocke toutes les appels correspondant &#xE0; la route &#xE0; laquelle il a &#xE9;t&#xE9; associ&#xE9; dans celle-ci quand ils &#xE9;chouent, et les rejouent tous &#xE0; la reception d&apos;un sync event.</p><p>Mais l&apos;option <code>onSync</code> n&apos;a pas vocation &#xE0; n&apos;&#xEA;tre qu&apos;une simple callback en adition de ce comportement. Elle le remplace.</p><p>Ainsi, quand nous avons associ&#xE9; <code>showNotification</code> au <code>onSync</code> du plugin, nous n&apos;avons pas ajout&#xE9; un comportement.
-Nous l&apos;avons remplac&#xE9;.</p><h3 id="customiser-le-comportement-de-workbox">Customiser le comportement de Workbox</h3><p>Pour r&#xE9;parer cette erreur, nous devons reproduire le comportement par d&#xE9;faut du plugin, et donc rejouer tous les appels dans sa file.</p><p>Editez <code>showNotification</code> pour obtenir le r&#xE9;sultat suivant :</p><pre><code class="language-javascript">const showNotification = ({ queue }) =&gt; {
+});</code></pre><h3 id="tester-lapplication-1">Tester l&apos;application</h3><p>R&#xE9;p&#xE9;tez maintenant les m&#xEA;mes op&#xE9;rations qu&apos;&#xE0; l&apos;&#xE9;tape pr&#xE9;c&#xE9;dente. Rechargez l&apos;application, activez le service worker via un skipInstall, rechargez &#xE0; nouveau, puis passez hors (en coupant le serveur et la connection r&#xE9;seau de votre machine). Vous pouvez &#xE0; pr&#xE9;sent cr&#xE9;er un nouvel &#xE9;v&#xE8;nement.</p><p>R&#xE9;activez votre connection (serveur, puis machine). Vous verrez alors appara&#xEE;tre la notification.</p><p>Mais il semblerait que nous ayons cr&#xE9;&#xE9; une notification trompeuse. Votre &#xE9;v&#xE8;nement n&apos;a pas &#xE9;t&#xE9; enregistr&#xE9; ! Explorez les devtools pour vous en assurer.</p><h3 id="explication-1">Explication</h3><p>Par d&#xE9;faut, un BackgroundSyncPlugin a un comportement des plus simple. Il cr&#xE9;&#xE9; un file (queue) par d&#xE9;faut, stocke toutes les appels correspondant &#xE0; la route &#xE0; laquelle il a &#xE9;t&#xE9; associ&#xE9; dans celle-ci quand ils &#xE9;chouent, et les rejouent tous &#xE0; la reception d&apos;un sync event.</p><p>Mais l&apos;option <code>onSync</code> n&apos;a pas vocation &#xE0; n&apos;&#xEA;tre qu&apos;une simple callback en addition de ce comportement. Elle le remplace.</p><p>Ainsi, quand nous avons associ&#xE9; <code>showNotification</code> au <code>onSync</code> du plugin, nous n&apos;avons pas ajout&#xE9; un comportement.
+Nous l&apos;avons remplac&#xE9;.</p><h3 id="customiser-le-comportement-de-workbox">Customiser le comportement de Workbox</h3><p>Pour r&#xE9;parer cette erreur, nous devons reproduire le comportement par d&#xE9;faut du plugin, et donc rejouer tous les appels dans sa file.</p><p>&#xC9;ditez <code>showNotification</code> pour obtenir le r&#xE9;sultat suivant :</p><pre><code class="language-javascript">const showNotification = ({ queue }) =&gt; {
   queue.replayRequests();
   self.registration.showNotification(&apos;Background sync success!&apos;, {
     body: &apos;&#x1F389;`&#x1F389;`&#x1F389;`&apos;
   });
-};</code></pre><p>Enfin, r&#xE9;-effectuez le test de l&apos;application pr&#xE9;c&#xE9;dent, et gardez un &#x153;il sur la console et &quot;Network&quot;. Votre appel POST sur /api/add sera cette fois-ci rejou&#xE9; correctement une fois la connexion retrouv&#xE9;e, et votre &#xE9;v&#xE8;nement bien enregistr&#xE9;.</p>
+};</code></pre><p>Enfin, r&#xE9;-effectuez le test de l&apos;application pr&#xE9;c&#xE9;dent, et gardez un &#x153;il sur la console et &quot;Network&quot;. Votre appel POST sur /api/add sera cette fois-ci rejou&#xE9; correctement une fois la connexion retrouv&#xE9;e, et votre &#xE9;v&#xE8;nement bien enregistr&#xE9;.</p><aside class="info">
+  Portions of this page are modifications based on work created and <a href="/readme/policies/">shared by Google</a> and used according to terms described in the <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons 4.0 Attribution License</a>.
+</aside>
+
+    </google-codelab-step>
+  
+    <google-codelab-step label="Se débarrasser de la mini info-bar">
+
+    <p>Nous avons impl&#xE9;ment&#xE9; des fonctionnalit&#xE9;s qui r&#xE9;pondent aux besoins de nos utilisateurs, dans une application performante, et avec une UX qui corresponde &#xE0; leurs attentes.</p><p>&#xC0; pr&#xE9;sent que nous pouvons donc &#xEA;tre confiant dans le succ&#xE8;s de notre app ( &#x1F937;&#x200D; ), notre priorit&#xE9; devient la fid&#xE9;lisation de la foule d&apos;utilisateurs qui ne va pas manquer de l&apos;utiliser.</p><p>Pour se faire, rien de mieux, techniquement, que l&apos;installation (ou A2HS, pour Add to Home Screen).</p><p>Afin d&apos;encourager l&apos;installation des Web Apps, une premi&#xE8;re solution apport&#xE9;e par Chrome for Android est la mini info-bar.</p><p><img src="https://developers.google.com/web/updates/images/2018/06/a2hs-infobar-cropped.png" alt="mini info-bar"></p><p>Malheureusement, cette <a href="https://developers.google.com/web/fundamentals/app-install-banners/native">mini info-bar</a> rebute bien plus le grand public qu&apos;elle n&apos;incite &#xE0; l&apos;installation.
+Il va donc &#xEA;tre primordial pour nous de l&apos;&#xE9;viter &#xE0; tout prix.</p><aside class="tip">
+  <p>
+    Pour tester l&apos;affichage de la mini info-bar, vous aurez besoin de charger la web app sur Chrome Android, en HTTPS ou localhost. La solution la plus simple consiste &#xE0; <a href="https://developers.google.com/web/tools/chrome-devtools/remote-debugging/local-server">utiliser la redirection de port de Chrome</a>.
+  </p>
+</aside><p>Dans <strong>app/js/main.js</strong>, ajouter le code suivant dans le <code>if(&apos;serviceWorker in navigator)</code> :</p><pre><code class="language-javascript">let deferredPrompt;
+
+window.addEventListener(&apos;beforeinstallprompt&apos;, e =&gt; {
+  console.log(&apos;beforeInstallPrompt event detected&apos;);
+  e.preventDefault();
+  deferredPrompt = e;
+  console.log(&apos;ready for A2HS&apos;);
+});</code></pre><p>Mettez &#xE0; jour votre application, et observez la console.</p><aside class="notice">
+  <p>
+    Pour les chapitres comme ceux-ci, o&#xF9; vous apporterez pas ou peu de modification au service-worker `sw.js`, mais aurez besoin de mettre &#xE0; jour l&apos;html et le javascript du window context r&#xE9;guli&#xE8;rement, il peut &#xEA;tre plus pratique de recharger toute l&apos;application &#xE0; chaque rafra&#xEE;chissement de la page, et donc d&apos;&#xE9;viter tout cache.
+  </p>
+  <p>
+    Pour cela, vous pouvez activer l&apos;option &quot;Update on reload&quot; pour recharger un service worker complet &#xE0; chaque fois :
+  </p>
+  <p class="center">
+    <img src="./assets/update-on-reload.png" alt="capture: update on reload">
+  </p>
+</aside><aside class="info">
+  Portions of this page are modifications based on work created and <a href="/readme/policies/">shared by Google</a> and used according to terms described in the <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons 4.0 Attribution License</a>.
+</aside>
+
+    </google-codelab-step>
+  
+    <google-codelab-step label="Encourager l'installation de l'application">
+
+    <p>A pr&#xE9;sent, seuls le menu du navigateur, et &#xE9;ventuellement l&apos;omnibox permettent d&apos;installer notre Web App.</p><p>Afin d&apos;&#xEA;tre plus incitatif, ajoutez un bouton d&apos;installation dans le <code>&lt;header&gt;</code> (entre les deux &#xE9;l&#xE9;ments existants) de <strong>app/index.html</strong> :</p><pre><code class="language-html">&lt;li&gt;
+  &lt;button class=&quot;button ripple&quot; id=&quot;install-btn&quot; style=&quot;display: none&quot;&gt;Install&lt;/button&gt;
+&lt;/li&gt;</code></pre><p>Remarquez que ce bouton est masqu&#xE9; par d&#xE9;faut. Il sera affich&#xE9; <i>uniquement</i> si le navigateur supporte le A2HS, et que l&apos;utilisateur n&apos;a pas d&#xE9;j&#xE0; refus&#xE9; l&apos;installation.</p><p>Pour ce faire, appeler une fonction <code>showInstallPromotion</code> en r&#xE9;ponse &#xE0; l&apos;&#xE9;v&#xE8;nement <code>beforeInstallPrompt</code>, dans <strong>app/js/main.js</strong> :</p><pre><code class="language-javascript">window.addEventListener(&apos;beforeinstallprompt&apos;, e =&gt; {
+  console.log(&apos;beforeInstallPrompt event detected&apos;);
+  e.preventDefault();
+  deferredPrompt = e;
+  showInstallPromotion();
+});</code></pre><p>Plus haut, d&#xE9;finissez cette fonction comme suit :</p><pre><code class="language-javascript">const btnAdd = document.getElementById(&apos;install-btn&apos;);
+
+function showInstallPromotion() {
+  btnAdd.style.display = &apos;inline-block&apos;;
+}</code></pre><p>Enfin, au click sur ce bouton, affichez l&apos;install prompt :</p><pre><code class="language-javascript">btnAdd.addEventListener(&apos;click&apos;, e =&gt; {
+  btnAdd.style.display = &apos;none&apos;;
+  deferredPrompt.prompt();
+  deferredPrompt.userChoice.then(choiceResult =&gt; {
+    if (choiceResult.outcome === &apos;accepted&apos;) {
+      console.log(&apos;User accepted the A2HS prompt&apos;);
+    } else {
+      console.log(&apos;User dismissed the A2HS prompt&apos;);
+    }
+    deferredPrompt = null;
+  });
+});</code></pre><p>Rafra&#xEE;chissez l&apos;application dans le navigateur pour observer le r&#xE9;sultat et tester ce bouton.</p><aside class="info">
+  Portions of this page are modifications based on work created and <a href="/readme/policies/">shared by Google</a> and used according to terms described in the <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons 4.0 Attribution License</a>.
+</aside>
+
+    </google-codelab-step>
+  
+    <google-codelab-step label="Améliorer l'UX de l'A2HS">
+
+    <p>Ajouter un bouton au header de votre application est rarement une bonne pratique.
+L&apos;espace y est rare, et l&apos;A2HS n&apos;est pas, dans la plupart des cas, la premi&#xE8;re fonctionnalit&#xE9; &#xE0; mettre en avant.</p><p>Pour bien promouvoir l&apos;installation de votre application vous devez, comme &#xE9;voqu&#xE9; pr&#xE9;c&#xE9;demment, bien int&#xE9;grer celle-ci au parcours de l&apos;utilisateur, en prenant en compte son niveau de fid&#xE9;lisation.</p><p>Plusieurs UX patterns, en fonction de votre type d&apos;application, existent pour cela.</p><aside class="tip">
+  Peter Mclachlan a &#xE9;crit un excellent article sur le sujet intitul&#xE9; <a href="https://developers.google.com/web/fundamentals/app-install-banners/promoting-install-mobile" target="_blank" rel="noopener noreferrer"><i>Patterns for Promoting PWA Installation (mobile)</i></a>
+</aside><p>Pour cette application, nous pouvons adoptez deux approches diff&#xE9;rentes.</p><h3 id="promouvoir-&#xE0;-la-consultation">Promouvoir &#xE0; la consultation</h3><p>Dans le cas o&#xF9; la consultation des &#xE9;v&#xE9;nements soit le premier usage de l&apos;application, la meilleure approche sera de promouvoir l&apos;installation dans le cadre de ce parcours.</p><p>Supprimez le bouton d&apos;installation pr&#xE9;c&#xE9;demment cr&#xE9;&#xE9; dans <strong>app/index.html</strong>, et ajouter une nouvelle &quot;card&quot; d&apos;installation dans le container o&#xF9; les &#xE9;v&#xE9;nements sont dynamiquement ajout&#xE9;s :</p><pre><code class="language-html">&lt;ul id=&quot;container&quot; class=&quot;container&quot;&gt;
+  &lt;!-- items dynamically populated --&gt;
+  &lt;li class=&quot;card&quot; id=&quot;install-card&quot; style=&quot;display: none&quot;&gt;
+    &lt;div class=&quot;card-text&quot;&gt;
+      &lt;h2&gt;Browse events anytime you want!&lt;/h2&gt;
+      &lt;p&gt;
+        &lt;button class=&quot;button ripple&quot; id=&quot;install-btn&quot;&gt;Install&lt;/button&gt;
+      &lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</code></pre><p>Dans <strong>app/js/main.js</strong>, remplacer <code>btnAdd</code> par le code suivant :</p><pre><code class="language-javascript">const installCard = document.getElementById(&apos;install-card&apos;);
+const btnAdd = installCard.querySelector(&apos;#install-btn&apos;);</code></pre><p>Enfin, remplacez <code>btnAdd</code> par <code>installCard</code> dans <code>showInstallPromotion</code> et l&apos;EventListener de <code>btnAdd &apos;click&apos;</code> :</p><pre><code class="language-javascript">function showInstallPromotion() {
+  installCard.style.display = &apos;inline-block&apos;;
+}</code></pre><pre><code class="language-javascript">btnAdd.addEventListener(&apos;click&apos;, e =&gt; {
+    installCard.style.display = &apos;none&apos;;
+    deferredPrompt.prompt();
+    //...
+}</code></pre><p>Enfin, pour un meilleur affichage, ajoutez un test dans <code>updateUI</code> afin de faire en sorte que &quot;l&apos;install card&quot; s&apos;affiche apr&#xE8;s le cinqui&#xE8;me &#xE9;v&#xE8;nement :</p><pre><code class="language-javascript">function updateUI(events) {
+  events.forEach(event =&gt; {
+    const item =
+      `&lt;li class=&quot;card&quot;&gt;
+         &lt;div class=&quot;card-text&quot;&gt;
+           &lt;h2&gt;${event.title}&lt;/h2&gt;
+           &lt;h4&gt;${event.date}&lt;/h4&gt;
+           &lt;h4&gt;${event.city}&lt;/h4&gt;
+           &lt;p&gt;${event.note}&lt;/p&gt;
+         &lt;/div&gt;
+       &lt;/li&gt;`;
+    const where = container.childElementCount &lt; 6 ? &apos;afterbegin&apos; : &apos;beforeend&apos;;
+    container.insertAdjacentHTML(where, item);
+  });
+}</code></pre><p>Rechargez l&apos;application, et assurez vous que tout fonctionne comme pr&#xE9;vu.</p><p>Cette approche reste malgr&#xE9; tout ennuyante pour l&apos;utilisateur. C&apos;est pourquoi il est important d&apos;y poser des limites.</p><ol>
+<li><strong>Permettre &#xE0; l&apos;utilisateur de refuser/masquer cette card</strong></li>
+</ol><p>Dans <strong>app/index.html</strong>, ajoutez un bouton &quot;Dismiss&quot; :</p><pre><code class="language-html">&lt;div class=&quot;card-text&quot;&gt;
+  &lt;h2&gt;Browse events anytime you want!&lt;/h2&gt;
+  &lt;p&gt;
+    &lt;button class=&quot;button ripple&quot; id=&quot;dismiss-btn&quot;&gt;Not now&lt;/button&gt;
+    &lt;button class=&quot;button ripple&quot; id=&quot;install-btn&quot;&gt;Install&lt;/button&gt;
+  &lt;/p&gt;
+&lt;/div&gt;</code></pre><p>Dans <strong>app/js/main.js</strong>, ajoutez un <code>EventHandler</code> pour masquer la card au click sur ce bouton :</p><pre><code class="language-javascript">const btnDismiss = installCard.querySelector(&apos;#dismiss-btn&apos;);
+
+btnDismiss.addEventListener(&apos;click&apos;, e =&gt; {
+  installCard.style.display = &apos;none&apos;;
+}</code></pre><p>Rechargez l&apos;application et cliquez sur le bouton. Rechargez &#xE0; nouveau, et la card r&#xE9;-appara&#xEE;t.</p><ol start="2">
+<li><strong>Conserver ce choix en m&#xE9;moire</strong></li>
+</ol><p>Pour cela, vous utiliserez simplement un cookie.</p><p>Copiez-collez les helpers suivants au d&#xE9;but de <strong>app/js/main.js</strong> :</p><pre><code class="language-javascript">const COOKIE_NAME = &apos;POSTPONED_A2HS&apos;;
+
+function setCookie(name, value, expirationMinutes) {
+  let d = new Date();
+  d.setTime(d.getTime() + expirationMinutes * 60 * 1000);
+
+  let expires = &apos;expires=&apos;+d.toUTCString();
+  document.cookie = name + &apos;=&apos; + value + &apos;; &apos; + expires + &apos;; path=/&apos;;
+}
+
+function getCookie(cookieName) {
+  let name = cookieName + &apos;=&apos;;
+  let ca = document.cookie.split(&apos;;&apos;);
+  let c;
+
+  for(var i = 0; i &lt; ca.length; i++) {
+    c = ca[i].trim();
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+
+  return &apos;&apos;;
+}</code></pre><p>Cr&#xE9;ez un cookie au click sur le bouton dismiss :</p><pre><code class="language-javascript">btnDismiss.addEventListener(&apos;click&apos;, e =&gt; {
+  installCard.style.display = &apos;none&apos;;
+  // By default, Chrome stop showing the mini info-bar during 3 months
+  // after the user dismissed it.
+  // We set it to 2 minutes for testing purpose only.
+  setCookie(COOKIE_NAME, &apos;true&apos;, 2);
+})</code></pre><p>Enfin, assurez vous que vous n&apos;afficherez pas la card tant que ce cookie ne sera pas expir&#xE9; :</p><pre><code class="language-javascript">function showInstallPromotion() {
+  if(getCookie(COOKIE_NAME) !== &apos;true&apos;) {
+    installCard.style.display = &apos;inline-block&apos;;
+  }
+}</code></pre><p>Rechargez l&apos;application, cliquez sur le bouton &quot;Not now&quot;, et recharger l&apos;application &#xE0; nouveau pour v&#xE9;rifier que la card est bien toujours masqu&#xE9;e. Puis attendez l&apos;expiration du cookie (ici, 3 minutes) et rechargez la page : la card appara&#xEE;t &#xE0; nouveau.</p><ol start="3">
+<li><strong>Limiter le nombre de fois o&#xF9; vous la pr&#xE9;sentez &#xE0; l&apos;utilisateur</strong></li>
+</ol><p>M&#xEA;me en l&apos;absence de refus par l&apos;utilisateur, il est primordial de limiter l&apos;affichage de cette card dans le temps, afin de ne pas para&#xEE;tre trop intrusif.</p><p>Dans <strong>app/js/main.js</strong>, ajouter un cookie &#xE0; l&apos;affichage de la card avec un temps plus court :</p><pre><code class="language-javascript">function showInstallPromotion() {
+  if(getCookie(COOKIE_NAME) !== &apos;true&apos;) {
+    installCard.style.display = &apos;inline-block&apos;;
+    setCookie(COOKIE_NAME, &apos;true&apos;, 1);
+  }
+}</code></pre><p>Rechargez la page par deux fois pour constater que la card est masqu&#xE9;e.</p><h3 id="promouvoir-&#xE0;-lutilisation">Promouvoir &#xE0; l&apos;utilisation</h3><p>Si malgr&#xE9; tout, nous constations que cette approche demeure trop intrusif pour un faible rendement, cela peut signifier que l&apos;utilisateur n&apos;est pas assez fid&#xE9;lis&#xE9; si il ne fait que consulter des &#xE9;v&#xE9;nements.</p><p>Dans ce cas, la cr&#xE9;ation par l&apos;utilisateur d&apos;un premier &#xE9;v&#xE9;nement sera sans aucun doute <em>le</em> moment clef.</p><p>Dans <strong>app/js/main.js</strong>, supprimez l&apos;appel &#xE0; <code>showInstallPromotion()</code> dans l&apos;EventHandler du <code>beforeInstallPrompt</code> :</p><pre><code class="language-javascript">window.addEventListener(&apos;beforeinstallprompt&apos;, e =&gt; {
+  console.log(&apos;beforeInstallPrompt event detected&apos;);
+  e.preventDefault();
+  deferredPrompt = e;
+  // don&apos;t show anything for now
+});</code></pre><p>Ajoutez le ensuite dans <code>addAndPostEvent</code>, apr&#xE8;s l&apos;appel &#xE0; <code>updateUI</code> :</p><pre><code class="language-javascript">updateUI([data]);
+showInstallPromotion();
+
+saveEventDataLocally([data]);</code></pre><p>Relancer l&apos;application. Quel(s) probl&#xE8;me(s) d&apos;UX pouvez vous encore identifier ? Quelles autres approches auriez-vous pu/du prendre ?</p><p>Prenez le temps d&apos;exp&#xE9;rimenter de possible correctifs avant de passer &#xE0; la conclusion de ce chapitre.</p><aside class="warning">
+  On ne triche pas &#x1F609;
+  <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+  ... sauf si vous en avez vraiment envie bien s&#xFB;r ...
+  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</aside><p>Un soucis assez &#xE9;vident est que la card devrait s&apos;afficher au dessus du formulaire, ou au moins &#xE0; c&#xF4;t&#xE9; de l&apos;&#xE9;v&#xE9;nement cr&#xE9;&#xE9;, afin de s&apos;assurer que l&apos;utilisateur en prenne directement connaissance et puisse la comprendre et l&apos;utiliser dans le bon contexte.</p><p>Remplacer la ligne o&#xF9; la variable <code>where</code> est initialis&#xE9;e dans <code>updateUI</code> par la suivante :</p><pre><code class="language-javascript">const where = events.length &gt; 1 ? &apos;afterbegin&apos; : &apos;beforeend&apos;;</code></pre><p>Suivant cette m&#xEA;me id&#xE9;e de promouvoir &quot;l&apos;installation d&apos;un site web&quot; (concept encore peu compris par le grand public), il est &#xE9;galement important de bien choisir votre wording.</p><p>Dans <strong>app/index.html</strong>, remplacez le titre de cette card par :</p><pre><code class="language-html">&lt;h2&gt;Add events where you want, when you want!&lt;/h2&gt;</code></pre>
 
     </google-codelab-step>
   
