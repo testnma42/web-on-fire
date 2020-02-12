@@ -35,13 +35,7 @@
 </ul><h3 id="pr&#xE9;-requis">Pr&#xE9;-requis</h3><p>Ce codelab requiert que vous soyez d&#xE9;j&#xE0; familier avec les &#xE9;l&#xE9;ments de base du d&#xE9;veloppement Web.</p><p>En particulier, il est recommand&#xE9; d&apos;avoir une certaine ma&#xEE;trise d&apos;HTML, de CSS et de JavaScript (i.e. ES2019),
 et d&apos;avoir au moins une fois contribu&#xE9; au d&#xE9;veloppement d&apos;une Web App (peu importe le framework ou la librairie utilis&#xE9;).</p><h3 id="important">IMPORTANT</h3><aside class="warning">
   <b>Dans le cas o&#xF9; vous assistiez &#xE0; une version &quot;live&quot; de ce codelab (durant une conf&#xE9;rence, comme le Devfest Paris 2020 par exemple), il vous est fortement recommand&#xE9; d&apos;effectuer les &#xE9;tapes 2 et 3 (installations) en amont !</b>
-</aside>
-
-    </google-codelab-step>
-  
-    <google-codelab-step label="Logiciels pré-requis">
-
-    <ul>
+</aside><h3 id="logiciels-indispensables">Logiciels indispensables</h3><ul>
 <li>Un IDE / un &#xE9;diteur de code ou de texte<ul>
 <li>recommandation : <a href="https://code.visualstudio.com/">Download Visual Studio Code</a></li>
 </ul>
@@ -53,14 +47,14 @@ et d&apos;avoir au moins une fois contribu&#xE9; au d&#xE9;veloppement d&apos;un
 </ul>
 </li>
 <li><a href="https://nodejs.org/en/">Node.js</a> et <a href="https://www.npmjs.com/">npm</a></li>
-</ul><h3 id="pour-tester-certaines-&#xE9;tapes">Pour tester certaines &#xE9;tapes</h3><aside class="notice">
-  Ces &#xE9;l&#xE9;ments sont n&#xE9;cessaires pour tester plusieurs fonctionnalit&#xE9;s que vous ajouterez &#xE0; la PWA. Ils ne sont pas absolument indispensable pour compl&#xE9;ter ce codelab, mais tr&#xE8;s fortement recommand&#xE9;s.
+</ul><h3 id="recommandations">Recommandations</h3><aside class="notice">
+  Ces &#xE9;l&#xE9;ments sont n&#xE9;cessaires pour tester plusieurs fonctionnalit&#xE9;s que vous ajouterez &#xE0; la PWA. Ils ne sont pas absolument indispensables pour compl&#xE9;ter ce codelab, mais tr&#xE8;s fortement recommand&#xE9;s.
 </aside><ul>
 <li>un syst&#xE8;me Windows ou Mac OS X<ul>
-<li>si vous utilisez Linux, vous pouvez utilisez une <a href="https://developer.microsoft.com/en-us/windows/downloads/virtual-machines/">VM</a>, mais vous devrez &#xE9;galement y installer la derni&#xE8;re version de Chrome (cf. plus haut), et vous assurer que celle-ci peut acc&#xE9;der au syst&#xE8;me h&#xF4;te via un r&#xE9;seau virtuel (HTTP)</li>
+<li>si vous utilisez Linux, vous pourrez au besoin utiliser une <a href="https://developer.microsoft.com/en-us/windows/downloads/virtual-machines/">VM</a>, mais vous devrez &#xE9;galement y installer la derni&#xE8;re version de Chrome (cf. plus haut), et vous assurer que celle-ci peut acc&#xE9;der au syst&#xE8;me h&#xF4;te via un r&#xE9;seau virtuel (HTTP)</li>
 </ul>
 </li>
-<li>un smartphone Android, un cable usb et <a href="https://developer.android.com/studio">Android Studio</a> &#x2139;&#xFE0F;</li>
+<li>un smartphone Android, un cable usb et <a href="https://developer.android.com/studio">Android Studio</a></li>
 </ul>
 
     </google-codelab-step>
@@ -73,36 +67,37 @@ et d&apos;avoir au moins une fois contribu&#xE9; au d&#xE9;veloppement d&apos;un
 
     </google-codelab-step>
   
-    <google-codelab-step label="(optionnel) Créer la PWA">
+    <google-codelab-step label="Premier contact avec l'application">
 
-    <aside class="special">
-  Le projet &#xE0; partir duquel vous effectuerez les &#xE9;tapes ult&#xE9;rieurs de ce codelab se basent sur l&apos;application construite en suivant le codelab de Google intitul&#xE9; <a href="https://codelabs.developers.google.com/codelabs/workbox-indexeddb" target="_blank" rel="noopener noreferrer"><i>Build an offline-first, data-driven PWA</i></a>. Vous pouvez sauter ce chapitre si vous ne souhaitez pas construire l&apos;application vous m&#xEA;me.
-</aside><h3 id="d&#xE9;marrer-le-serveur">d&#xE9;marrer le serveur</h3><aside class="notice">
-  Les points suivants remplacent l&apos;&#xE9;tape 3 du codelab mentionn&#xE9; pr&#xE9;c&#xE9;demment.<br>
-  <a href="https://codelabs.developers.google.com/codelabs/workbox-indexeddb/#2" target="_blank" rel="noopener noreferrer">Consultez la page correspondante</a> pour plus d&apos;explications.
-</aside><p>Via le terminal, rendez-vous dans le dossier &quot;project&quot; o&#xF9; se situent les &#xE9;l&#xE9;ments de base du projet :</p><pre><code class="language-bash">cd project</code></pre><p>&#xC0; partir de ce dossier, d&#xE9;marrez le serveur de d&#xE9;veloppement pour pouvoir utiliser et tester l&apos;application :</p><pre><code class="language-bash">npm run --silent start</code></pre><h3 id="ouvrir-lapplication">Ouvrir l&apos;application</h3><p>Ouvrez l&apos;application en entrant l&apos;url <a href="http://localhost:8081">localhost:8081</a> dans votre navigateur web.</p><p>L&apos;application vous demande alors une autorisation pour pouvoir afficher des notifications. Cliquez sur &quot;Autoriser&quot; ou &quot;Allow&quot; pour l&apos;accepter.</p><p><img src="https://codelabs.developers.google.com/codelabs/workbox-indexeddb/img/9ca6ac4aededfba6.png" alt="Autoriser les notifications"> <br><em>Cr&#xE9;dit image: &#xA9;&#xFE0F; Google Inc.</em></p><h3 id="cache-et-indexdb">Cache et IndexDB</h3><aside class="warning">
-  <p>Assurez vous d&apos;utiliser la derni&#xE8;re version de Workbox (5.0.0 au moment de l&apos;&#xE9;criture de ce codelab).</p>
-  <p>
-    Pour se faire, utilisez la ligne suivante &#xE0; la place de celle indiqu&#xE9;e sur le codelab Google:
-  </p><p>
-</p></aside><pre><code class="language-javascript">importScripts(&apos;https://storage.googleapis.com/workbox-cdn/releases/5.0.0/workbox-sw.js&apos;);</code></pre><p>Suivez les <a href="https://codelabs.developers.google.com/codelabs/workbox-indexeddb/#3" target="_blank" rel="noopener noreferrer">&#xE9;tapes 4 &#xE0; 7 du codelab Google</a> pour permettre &#xE0; l&apos;application de fonctionner pleinement hors-ligne.</p>
+    <p>Via le terminal, rendez-vous dans le dossier &quot;project&quot; o&#xF9; se situent les &#xE9;l&#xE9;ments de base du projet :</p><pre><code class="language-bash">cd project</code></pre><p>&#xC0; partir de ce dossier, d&#xE9;marrez le serveur de d&#xE9;veloppement pour pouvoir utiliser et tester l&apos;application :</p><pre><code class="language-bash">npm run --silent start</code></pre><p>Ouvrez l&apos;application en entrant l&apos;url <a href="http://localhost:8081">localhost:8081</a> dans votre navigateur web.</p><p>L&apos;application vous demande alors une autorisation pour pouvoir afficher des notifications. Cliquez sur &quot;Autoriser&quot; ou &quot;Allow&quot; pour l&apos;accepter.</p><p><img src="https://codelabs.developers.google.com/codelabs/workbox-indexeddb/img/9ca6ac4aededfba6.png" alt="Autoriser les notifications"> <br><em>Cr&#xE9;dit image: &#xA9;&#xFE0F; Google Inc.</em></p><aside class="special">
+  Cette application est issue d&apos;un codelab de Google intitul&#xE9; <a href="https://codelabs.developers.google.com/codelabs/workbox-indexeddb/#2" target="_blank" rel="noopener noreferrer"><i>Build an offline-first, data-driven PWA</i></a>.
+</aside>
 
     </google-codelab-step>
   
-    <google-codelab-step label="Enregistrer les données une fois de retour en ligne">
+    <google-codelab-step label="Une application orientée données">
 
-    <h3 id="d&#xE9;marrer-le-serveur-1">D&#xE9;marrer le serveur</h3><p>Si vous &#xEA;tes pass&#xE9; directement &#xE0; cette &#xE9;tape sans effectuer la pr&#xE9;c&#xE9;dente, rendez vous dans le projet &quot;before-bgsync&quot; et lancez le serveur de d&#xE9;veloppement :</p><pre><code class="language-bash">cd before-bgsync
-npm run --silent start</code></pre><p>Ouvrez ensuite <a href="http://localhost:8081">localhost:8081</a> avec Chrome pour tester l&apos;application.</p><aside class="warning">
-  Si vous ne l&apos;avez pas d&#xE9;j&#xE0; fait &#xE0; l&apos;&#xE9;tape pr&#xE9;c&#xE9;dente, acceptez la demande d&apos;autorisation de notifications.
-</aside><p>Une fois l&apos;application charg&#xE9;e, stoppez le serveur (Ctrl+C dans le terminal) pour simuler une coupure r&#xE9;seau, puis rechargez l&apos;application.</p><p>Vous constaterez alors que l&apos;application semble fonctionner &#xE0; l&apos;identique.</p><h3 id="analyser-le-fonctionnement-du-mode-hors-ligne">Analyser le fonctionnement du mode hors-ligne</h3><aside style="notice">
-  Si vous avez effectu&#xE9; l&apos;&#xE9;tape 4, vous pouvez passer cette &#xE9;tape.
-</aside><p>Dans les developer tools de Chrome, explorez les &#xE9;l&#xE9;ments suivants :</p><ul>
+    <p>Retournez &#xE0; la racine du projet, et lancez la commande permettant de modifier automatiquement le code pour ce chapitre :</p><pre><code class="language-bash">cd ..
+npm run goto --step=4</code></pre><aside class="special">
+  <p>Cette m&#xEA;me commande permet &#xE9;galement de &quot;sauter&quot;/corriger tous les chapitres suivants. Il est cependant indispensable de les lancer avant toute modification du code du projet, dans l&apos;ordre, en commen&#xE7;ant par 4.</p>
+</aside><p>Une fois le serveur d&#xE9;marr&#xE9; et l&apos;application charg&#xE9;e dans votre navigateur, stoppez le serveur (<code>Ctrl+C</code> dans le terminal) pour simuler une coupure r&#xE9;seau, puis rechargez l&apos;application.</p><p>Vous constaterez alors que l&apos;application semble fonctionner &#xE0; l&apos;identique.</p><p>Dans les developer tools de Chrome, explorez les &#xE9;l&#xE9;ments suivants :</p><ul>
 <li>Service Workers : un service worker est actif</li>
 <li>IndexedDB : la base de donn&#xE9;e &apos;dashboardr&apos; permet de stocker localement les events pour une consultation hors ligne</li>
-</ul><p>Enfin, stoppez le serveur (Ctrl+C dans la console) avant de passer &#xE0; l&apos;&#xE9;tape suivante.</p><h3 id="explication">Explication</h3><p>L&apos;application dont vous disposez &#xE0; pr&#xE9;sent (apr&#xE8;s avoir suivi l&apos;&#xE9;tape pr&#xE9;c&#xE9;dent, ou en &#xE9;tant pass&#xE9; directement &#xE0; celle-ci) est une PWA enti&#xE8;rement disponible hors-ligne.</p><p>Sans d&#xE9;veloppement sp&#xE9;cifique, quand un utilisateur tente d&apos;acc&#xE9;der &#xE0; une Web App en &#xE9;tant d&#xE9;connect&#xE9;, un message &quot;Offline&quot; est affich&#xE9;, emp&#xE9;chant toute utilisateur de l&apos;application.</p><p class="center">
+</ul><p>L&apos;application dont vous disposez &#xE0; pr&#xE9;sent est une PWA enti&#xE8;rement disponible hors-ligne.</p><h3 id="explication">Explication</h3><p>Sans d&#xE9;veloppement sp&#xE9;cifique, quand un utilisateur tente d&apos;acc&#xE9;der &#xE0; une Web App en &#xE9;tant d&#xE9;connect&#xE9;, un message &quot;Offline&quot; est affich&#xE9;, emp&#xE9;chant toute utilisation de l&apos;application.</p><p class="center">
   <img src="./assets/firefox-offline.png" alt="firefox is offline" style="margin: 1rem">
-</p><p>Workbox a permis, en mettant en cache le App Shell, de ne jamais afficher ce type de message pour tout utilisateur retournant sur l&apos;application.</p><p>Mais une application n&apos;est rien sans donn&#xE9;es !
-Nous avons donc utilis&#xE9; IndexDB pour mettre ces donn&#xE9;es en cache (ici, des &quot;events&quot;), et permettre de les consulter m&#xEA;me en &#xE9;tant hors-ligne.</p><p>Un probl&#xE8;me persiste cependant : comme le serveur n&apos;est bien &#xE9;videmment pas disponible quand l&apos;utilisateur est hors ligne, tous les &quot;events&quot; qu&apos;il aura alors cr&#xE9;&#xE9; n&apos;auront &#xE9;t&#xE9; stock&#xE9;s que localement. Ils seront donc perdus tr&#xE8;s rapidement !</p><p>Nous allons durant cette &#xE9;tape r&#xE9;soudre ce probl&#xE8;me via workbox-background-sync, et donc la Background Sync API.</p><h3 id="compatibilit&#xE9;-des-navigateurs">Compatibilit&#xE9; des navigateurs</h3><p>La <a href="https://wicg.github.io/BackgroundSync/spec/">BackgroundSync API</a> est toujours &#xE0; ce jour &#xE0; l&apos;&#xE9;tat de Draft.
+</p><p>Workbox a permis, en mettant en cache le App Shell, de ne jamais montrer ce type de message &#xE0; un utilisateur retournant sur l&apos;application.</p><p>Mais une application n&apos;est rien sans donn&#xE9;es !
+Nous avons donc utilis&#xE9; IndexDB pour mettre ces donn&#xE9;es en cache (ici, des &quot;events&quot;), et permettre de les consulter m&#xEA;me en &#xE9;tant hors-ligne.</p><p>Un probl&#xE8;me persiste cependant : comme le serveur n&apos;est bien &#xE9;videmment pas disponible quand l&apos;utilisateur est hors ligne, tous les &quot;events&quot; qu&apos;il aura alors cr&#xE9;&#xE9; n&apos;auront &#xE9;t&#xE9; stock&#xE9;s que localement. Ils seront donc perdus tr&#xE8;s rapidement !</p><p>Nous allons dans le chapitre suivant r&#xE9;soudre ce probl&#xE8;me via workbox-background-sync, et donc la Background Sync API.</p><h3 id="pas-&#xE0;-pas-optionnel">Pas-&#xE0;-pas (optionnel)</h3><p>Vous pouvez &#xE9;galement suivre les <a href="https://codelabs.developers.google.com/codelabs/workbox-indexeddb/#3" target="_blank" rel="noopener noreferrer">&#xE9;tapes 4 &#xE0; 7 du codelab Google</a> pour mieux comprendre en d&#xE9;tails ces fonctionnalit&#xE9;s.</p><p>Pour gagner du temps, les &quot;step&quot; correspondant ont &#xE9;t&#xE9; cr&#xE9;&#xE9;s pour la commande &quot;goto&quot;. Leurs num&#xE9;ros suivent le format <code>4-&lt;step google&gt;</code> :</p><pre><code class="language-bash">npm run goto --step=4-4
+npm run goto --step=4-5
+npm run goto --step=4-6
+npm run goto --step=4-7</code></pre><aside class="warning">
+  Si vous d&#xE9;cidez d&apos;&#xE9;crire ce code vous m&#xEA;me, assurez vous d&apos;utiliser la derni&#xE8;re version de Workbox (5.0.0) au lieu de celle indiqu&#xE9;e dans le premier code d&apos;exemple (3.5.0).
+</aside><pre><code class="language-javascript">importScripts(&apos;https://storage.googleapis.com/workbox-cdn/releases/5.0.0/workbox-sw.js&apos;);</code></pre>
+
+    </google-codelab-step>
+  
+    <google-codelab-step label="Ne pas perdre de données hors-ligne">
+
+    <h3 id="compatibilit&#xE9;-des-navigateurs">Compatibilit&#xE9; des navigateurs</h3><p>La <a href="https://wicg.github.io/BackgroundSync/spec/">BackgroundSync API</a> est toujours &#xE0; ce jour &#xE0; l&apos;&#xE9;tat de Draft.
 Par cons&#xE9;quent, m&#xEA;me si <a href="https://groups.google.com/forum/#!msg/mozilla.dev.platform/cTAnBeZFtUE/kx0I4UC-AQAJ">Firefox souhaite l&apos;impl&#xE9;menter depuis longtemps</a>, celle-ci n&apos;est pour l&apos;heure support&#xE9;e que par <a href="https://www.chromestatus.com/feature/6170807885627392">Chrome</a> et <a href="https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerRegistration/sync#Browser_compatibility">Opera</a>.</p><p>Fort heureusement, nous allons impl&#xE9;menter cette fonctionnalit&#xE9; via Workbox, qui int&#xE8;gre une <a href="https://developers.google.com/web/tools/workbox/modules/workbox-background-sync#adding_a_request_to_the_queue">strat&#xE9;gie de fallback</a> :
 &#xE0; chaque fois que le service worker sera &#xE0; nouveau d&#xE9;marr&#xE9;, celui-ci rejouera tous les appels qui n&apos;ont pu aboutir jusque l&#xE0;, et ont donc &#xE9;t&#xE9; mis en attente.</p><p>Cela est bien entendu moins efficace (car l&apos;application doit &#xEA;tre active pour se faire), mais r&#xE9;sout la plupart des probl&#xE8;mes de compatibilit&#xE9;.</p><h3 id="mise-en-place-du-background-sync">Mise en place du Background Sync</h3><p>Ajoutez le code suivant dans <strong>app/sw.js</strong> juste en dessous de <code>precacheAndRoute</code> :</p><pre><code class="language-javascript">const { BackgroundSyncPlugin } = workbox.backgroundSync;
 const { registerRoute } = workbox.routing;
@@ -115,23 +110,25 @@ const networkWithBackgroundSync = new NetworkOnly({
 });
 
 registerRoute(/\/api\/add/, networkWithBackgroundSync, &apos;POST&apos;);</code></pre><p>Enregistrez le fichier, et relancez le serveur :</p><pre><code class="language-bash">npm run --silent start</code></pre><h3 id="tester-lapplication">Tester l&apos;application</h3><p>Pour voir le r&#xE9;sultat de cette nouvelle fonctionnalit&#xE9;, effectuez les actions suivantes :</p><ol>
-<li>Actualisez l&apos;application
-a. Rafra&#xEE;chissez la page dans Chrome.
-b. Activez le nouveau service worker en cliquant sur <code>skipWaiting</code> dans les Developer Tools &gt; Service Workers.
-c. Enfin, rafra&#xEE;chissez la page &#xE0; nouveau.</li>
-<li>Stoppez le serveur en entrant <code>Ctrl+C</code> pour remettre l&apos;application hors-ligne.</li>
-<li>D&#xE9;connectez votre ordinateur du r&#xE9;seau <strong>pour de vrais</strong> !</li>
-<li>Dans les devtools, &#xE0; la section &quot;Background Sync&quot;, d&#xE9;marrez la capture des &#xE9;v&#xE8;nements Background Sync.</li>
+<li>Actualisez l&apos;application<ol>
+<li>Rafra&#xEE;chissez la page dans Chrome</li>
+<li>Activez le nouveau service worker en cliquant sur <code>skipWaiting</code> dans <code>Developer Tools &gt; Service Workers</code></li>
+<li>Enfin, rafra&#xEE;chissez la page &#xE0; nouveau</li>
+</ol>
+</li>
+<li>Stoppez le serveur en entrant <code>Ctrl+C</code> pour remettre l&apos;application hors-ligne</li>
+<li>D&#xE9;connectez votre ordinateur du r&#xE9;seau <strong>pour de vrais</strong> (wifi et cable)</li>
+<li>Dans <code>Developer Tools &gt; Background Sync</code>, d&#xE9;marrez la capture des &#xE9;v&#xE8;nements Background Sync.</li>
 </ol><p><img src="./assets/record-bgsync.png" alt="capture: record bgsync in Chrome"></p><ol start="5">
 <li>Cr&#xE9;er un nouvel &apos;event&apos; via le formulaire en bas de l&apos;application.</li>
-</ol><p>En allant &#xE0; l&apos;onglet &apos;Network&apos; des devtools, vous pourrez constater qu&apos;une requ&#xEA;te vers <code>/api/add</code> a &#xE9;chou&#xE9;e.</p><p><img src="./assets/5-failed-request.png" alt="capture: request failed"></p><p>Dans le m&#xEA;me temps, une nouvelle base <code>workbox-background-sync</code> a &#xE9;t&#xE9; cr&#xE9;&#xE9;e, contenant une request vers <code>http://localhost:8081/api/add</code> (<code>requestData.url</code>) (cf. &quot;Application &gt; IndexedDB&quot;) et un &#xE9;v&#xE8;nement &quot;Registered Sync&quot; est visible dans &quot;Background Sync&quot;.</p><aside class="notice">
+</ol><p>En allant &#xE0; l&apos;onglet &apos;Network&apos; des devtools, vous pourrez constater qu&apos;une requ&#xEA;te vers <code>/api/add</code> a &#xE9;chou&#xE9;e.</p><p><img src="./assets/5-failed-request.png" alt="capture: request failed"></p><p>Dans le m&#xEA;me temps, une nouvelle base <code>workbox-background-sync</code> a &#xE9;t&#xE9; cr&#xE9;&#xE9;e, contenant une request vers <code>http://localhost:8081/api/add</code> (<code>requestData.url</code>) (cf. <code>Developer Tools &gt; Application &gt; IndexedDB</code>) et un &#xE9;v&#xE8;nement &quot;Registered Sync&quot; est visible dans &quot;Background Sync&quot;.</p><aside class="notice">
   Pensez &#xE0; rafra&#xEE;chir IndexedDB (click droit) si rien n&apos;appara&#xEE;t.
 </aside><p>Enfin, il est temps de repasser en ligne :</p><ol>
 <li>Relancez le serveur</li>
 </ol><pre><code class="language-bash">npm run --silent start</code></pre><ol start="2">
 <li>Une fois le serveur pleinement disponible, r&#xE9;tablissez la connexion de votre machine.</li>
 </ol><p>De nouveaux &#xE9;v&#xE8;nements Background Sync sont &#xE0; pr&#xE9;sent visible dans les devtools.</p><p><img src="./assets/bgsync-events.png" alt="capture: bgsync events"></p><p>Cela a permis &#xE0; votre service worker de retenter l&apos;appel &#xE0; <code>/api/add</code>, avec succ&#xE8;s cette fois, comme indiqu&#xE9; dans &quot;Networks&quot;.</p><p>Bien entendu, la requ&#xEA;te &#xE0; du m&#xEA;me coup &#xE9;t&#xE9; supprim&#xE9;e de la base IndexedDB.</p><p>Enfin, rechargez la page : vous constaterez que votre nouvel &#xE9;v&#xE8;nement a bien &#xE9;t&#xE9; enregistr&#xE9;, et est donc toujours pr&#xE9;sent.</p><aside class="special">
-  Vos nouveaux &#xE9;v&#xE8;nements ont m&#xEA;me &#xE9;t&#xE9; enregistr&#xE9;s par le serveur dans `server-data/events.json`.
+  Vos nouveaux &#xE9;v&#xE8;nements ont m&#xEA;me &#xE9;t&#xE9; enregistr&#xE9;s par le serveur dans <code>server-data/events.json</code>.
 </aside><aside class="warning">
   Le background sync sous Chrome <a href="https://github.com/GoogleChrome/workbox/issues/1896">peut parfois &#xEA;tre capricieux</a>. Si un &quot;Registered Sync&quot; n&apos;apparait pas apr&#xE8;s que vous ayez cr&#xE9;&#xE9; votre &#xE9;v&#xE8;nement, il s&apos;agit sans doute d&apos;un bug ind&#xE9;pendant de l&apos;application. Fermez compl&#xE8;tement Chrome (y compris les processus en arri&#xE8;re plan), red&#xE9;marrez le, et retentez l&apos;op&#xE9;ration apr&#xE8;s avoir supprim&#xE9; toutes les donn&#xE9;es de l&apos;application (Clear Storage &gt; Clear site data).
 </aside>
@@ -140,9 +137,7 @@ c. Enfin, rafra&#xEE;chissez la page &#xE0; nouveau.</li>
   
     <google-codelab-step label="Informer l'utilisateur de l'enregistement">
 
-    <p>La potentialit&#xE9; d&apos;une perte de donn&#xE9;es est toujours source de stress pour vos utilisateurs.</p><aside class="special">
-  Votre serviteur en sait quelque chose, &#xE9;tant donn&#xE9; qu&apos;il &#xE9;crit actuellement ce chapitre pour la seconde fois, suite &#xE0; un git checkout malencontreux &#x1F613;. Ironique n&apos;est-ce pas ?
-</aside><p>C&apos;est pourquoi il est indispensable de prendre en compte l&apos;int&#xE9;gralit&#xE9; de leur parcours, de la cr&#xE9;ation de donn&#xE9;es hors ligne (et donc, leur stockage localement) &#xE0; l&apos;enregistrement de celles ci c&#xF4;t&#xE9; serveur une fois la connexion retrouv&#xE9;e.</p><aside class="warning">
+    <p>La potentialit&#xE9; d&apos;une perte de donn&#xE9;es est toujours source de stress pour vos utilisateurs. <em>Votre serviteur en sait quelque chose, &#xE9;tant donn&#xE9; qu&apos;il &#xE9;crit actuellement ce chapitre pour la seconde fois, suite &#xE0; un git checkout malencontreux &#x1F613;. Ironique n&apos;est-ce pas ?</em></p><p>C&apos;est pourquoi il est indispensable de prendre en compte l&apos;int&#xE9;gralit&#xE9; de leur parcours, de la cr&#xE9;ation de donn&#xE9;es hors ligne (et donc, leur stockage localement) &#xE0; l&apos;enregistrement de celles ci c&#xF4;t&#xE9; serveur une fois la connexion retrouv&#xE9;e.</p><aside class="warning">
   Notez bien que sans l&apos;usage des outils de d&#xE9;veloppement et l&apos;acc&#xE8;s au serveur, vous auriez &#xE9;t&#xE9; bien incapable de dire, &#xE0; l&apos;&#xE9;tape pr&#xE9;c&#xE9;dente, si vos &#xE9;v&#xE8;nements avaient bien &#xE9;t&#xE9; enregistr&#xE9;s.
 </aside><p>Ici, notre application est plut&#xF4;t sommaire. Nous nous contenterons donc d&apos;informer l&apos;utisateur de l&apos;enregistrement de ces donn&#xE9;es via une notification.</p><h3 id="afficher-une-notification">Afficher une notification</h3><p>Ajoutez le code suivant &#xE0; <strong>app/sw.js</strong> :</p><pre><code class="language-javascript">const showNotification = () =&gt; {
   self.registration.showNotification(&apos;Background sync success!&apos;, {
