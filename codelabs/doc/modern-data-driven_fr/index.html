@@ -353,6 +353,65 @@ saveEventDataLocally([data]);</code></pre><p>Relancer l&apos;application. Quel(s
 
     </google-codelab-step>
   
+    <google-codelab-step label="Partager des événements">
+
+    <h3 id="d&#xE9;bugger-lapplication-sur-android">D&#xE9;bugger l&apos;application sur Android</h3><aside class="tip">
+  Si vous &#xEA;tes fan d&apos;Apple jusqu&apos;au bout des ongles et n&apos;avez qu&apos;un Mac OS et iOS &#xE0; disposition ? Pas de panique : ce sujet a &#xE9;t&#xE9; justement s&#xE9;lectionn&#xE9; car un des rares &#xE9;galement compatible Safari (du moins, en th&#xE9;orie). Vous pouvez donc sauter cette partie, et continuer avec Safari. Au passage, je vous invite &#xE0; aller lire <a href="https://twitter.com/slightlylate/status/1191026394421026816">ce petit thread sur Twitter</a> o&#xF9; Alex Russell, le &quot;p&#xE8;re&quot; des PWA, fait le point sur les rapport entre votre chouchou et le Web.
+</aside><p>Connectez votre smartphone Android &#xE0; votre ordinateur par cable USB.</p><p>Dans les param&#xE8;tres Android, ouvrez le menu About Phone pour afficher le Build Number, et taper dessus 7 fois :</p><ul>
+<li>Android 9 (API level 28) and higher: Settings &gt; About Phone &gt; Build Number</li>
+<li>Android 8.0.0 (API level 26) and Android 8.1.0 (API level 26): Settings &gt; System &gt; About Phone &gt; Build Number</li>
+<li>Android 7.1 (API level 25) and lower: Settings &gt; About Phone &gt; Build Number</li>
+</ul><p>Cela permet d&apos;afficher les <a href="https://developer.android.com/studio/debug/dev-options">Options de d&#xE9;veloppement</a> &#xE0; la racine du menu, tout en bas de la liste.</p><p>A la section &quot;D&#xE9;bogage&quot;, activez le D&#xE9;bogage USB.</p><p>Ouvrez ensuite [chrome://inspect/#devices] dans Chrome sur votre ordinateur. Acceptez la demande de connexion sur votre smartphone.</p><p>Cliquez sur le bouton <code>Port forwarding...</code> et ajouter le port 8081 pour localhost:8081.</p><p>Ouvrez Chrome sur Android. Il devrait alors appara&#xEE;tre dans la liste des p&#xE9;riph&#xE9;riques connect&#xE9;s dans Chrome sur votre ordinateur.</p><p>Entre <code>localhost:8081</code> dans le champs &apos;Open Tab with url&apos; et validez. L&apos;application s&apos;ouvre alors sur votre t&#xE9;l&#xE9;phone. Cliquez sur &apos;inspect&apos; pour en afficher une copie sur votre ordinateur et pouvoir utiliser les DevTools.</p><h3 id="web-share-api">Web Share API</h3><p>Dans le header de <strong>app/index.html</strong>, ajoutez un bouton &quot;Share&quot; pour inciter vos utilisateur &#xE0; partager autour d&apos;eux la joie qu&apos;ils &#xE9;prouvent en utilisant votre formidable Web App :</p><pre><code class="language-html">&lt;li&gt;&lt;img src=&quot;images/icons/share.svg&quot; class=&quot;button share&quot; alt=&quot;share&quot; /&gt;&lt;/li&gt;</code></pre><aside class="tips">
+  La Web Share API est tr&#xE9;s simple. Consulter la page MDN de <a href="https://developer.mozilla.org/en-US/docs/Web/API/Navigator/share">Navigator.share</a> devrait vous suffire. Pour plus de d&#xE9;tails, vous pouvez &#xE9;galement consulter l&apos;article de pr&#xE9;sentation sur <a href="https://web.dev/web-share/">Web.dev</a>.
+</aside><p>Dans <strong>app/js/mains.js</strong> nous allons &#xE0; pr&#xE9;sent pouvoir utiliser la Web Share Api pour partager du contenu au click sur ce bouton :</p><pre><code class="language-javascript">const shareBtn = document.querySelector(&apos;.share&apos;);
+
+if (navigator.share) {
+  shareBtn.addEventListener(&apos;click&apos;, async () =&gt; {
+    try {
+      await navigator.share({
+        title: &apos;The Web is on FIRE, the Codelab&apos;,
+        text: `Check out this codelab!`,
+        url: &apos;https://next.wof.show/codelabs/doc/modern-data-driven_fr/&apos;
+      });
+      console.log(&apos;Successful share&apos;);
+    } catch (error) {
+      console.warn(&apos;Error sharing&apos;, error);
+    }
+  });
+} else {
+  console.warn(`The Web Share Api isn&apos;t supported by your Browser.`)
+}</code></pre><p>Mettez &#xE0; jour l&apos;application dans Chrome sur Android, et cliquez sur le bouton.</p>
+
+    </google-codelab-step>
+  
+    <google-codelab-step label="Recevoir un partage de données">
+
+    <p>&#xC0; ne pas confondre avec la Web Share API, la <a href>Web Share <strong>Target</strong> API</a> va nous permettre, &#xE0; l&apos;opposer, d&apos;indiquer au syst&#xE8;me que notre application peut <em>recevoir</em> un partage.</p><p>Dans <strong>app/manifest.json</strong>, ajoutez l&apos;entr&#xE9;e suivante &#xE0; d&apos;informer le syst&#xE8;me que votre PWA, une fois install&#xE9;e, pourra &#xEA;tre ajout&#xE9;e &#xE0; la liste des applications vers lesquelles il est possible de partager du contenu :</p><pre><code class="language-json">&quot;share_target&quot;: {
+  &quot;action&quot;: &quot;/&quot;,
+  &quot;method&quot;: &quot;GET&quot;,
+  &quot;enctype&quot;: &quot;application/x-www-form-urlencoded&quot;,
+  &quot;params&quot;: {
+    &quot;title&quot;: &quot;title&quot;,
+    &quot;text&quot;: &quot;text&quot;,
+    &quot;url&quot;: &quot;url&quot;
+  }
+}</code></pre><p>Ici, nous dison au syst&#xE8;me que lorsque l&apos;utilisateur selectionne notre application comme cible d&apos;un partage, il doit fait appel, en HTTP Get, &#xE0; notre url racine (donc index.html) et passer les param&#xE8;tres GET title et text.</p><p>Dans <strong>app/js/main.js</strong>, ajoutez, en fin de fichier, la m&#xE9;thode qui permettra d&apos;enregistrer un nouvel &#xE9;v&#xE8;nement si au moins un de ces param&#xE8;tres est renseign&#xE9; :</p><pre><code class="language-javascript">window.addEventListener(&apos;DOMContentLoaded&apos;, () =&gt; {
+  const parsedUrl = new URL(window.location);
+  const title = parsedUrl.searchParams.get(&apos;title&apos;);
+  const text = parsedUrl.searchParams.get(&apos;text&apos;);
+  const url = parsedUrl.searchParams.get(&apos;url&apos;);
+  if (title || text || url) {
+    updateUI([{
+      title,
+      note: url &amp;&amp; text ? `${text}: ${url}` : url || text,
+      date: &apos;&apos;,
+      city: &apos;&apos;
+    }]);
+  }
+});</code></pre><p>Relancez l&apos;application dans Chrome pour Android. Assurez vous bien, via les DevTools, que le manifest ne pr&#xE9;sente pas d&apos;erreur, et que main.js a &#xE9;t&#xE9; mis &#xE0; jour.</p><p>Installez l&apos;application (Menu &gt; Ajouter l&apos;application &#xE0; l&apos;&#xE9;cran d&apos;accueil).</p><p>Enfin, ouvrez l&apos;application de votre choix pour effectuer un partage (Chrome lui m&#xEA;me peut &#xEA;tre utilis&#xE9;), et s&#xE9;lectionnez &quot;WoF Codelab Demo&quot; comme cible. Une fois l&apos;application ouverte, assurez vous que le nouvel &#xE9;v&#xE8;nement a bien &#xE9;t&#xE9; cr&#xE9;&#xE9;.</p>
+
+    </google-codelab-step>
+  
 
       </google-codelab>
 
