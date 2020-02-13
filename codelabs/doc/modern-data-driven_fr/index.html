@@ -62,11 +62,11 @@ et d&apos;avoir au moins une fois contribu&#xE9; au d&#xE9;veloppement d&apos;un
 </ul><h3 id="recommandations">Recommandations</h3><aside class="notice">
   Ces &#xE9;l&#xE9;ments sont n&#xE9;cessaires pour tester plusieurs fonctionnalit&#xE9;s que vous ajouterez &#xE0; la PWA. Ils ne sont pas absolument indispensables pour compl&#xE9;ter ce codelab, mais tr&#xE8;s fortement recommand&#xE9;s.
 </aside><ul>
-<li>un syst&#xE8;me Windows ou Mac OS X<ul>
-<li>si vous utilisez Linux, vous pourrez au besoin utiliser une <a href="https://developer.microsoft.com/en-us/windows/downloads/virtual-machines/">VM</a>, mais vous devrez &#xE9;galement y installer la derni&#xE8;re version de Chrome (cf. plus haut), et vous assurer que celle-ci peut acc&#xE9;der au syst&#xE8;me h&#xF4;te via un r&#xE9;seau virtuel (HTTP)</li>
+<li>un smartphone Android &quot;r&#xE9;cent&quot; avec Chrome, <a href="https://play.google.com/store/apps/details?id=com.chrome.canary&amp;hl=fr">Chrome Canary</a>, et un cable usb<ul>
+<li>OU Mac OS X &amp; Safari</li>
 </ul>
 </li>
-<li>un smartphone Android &quot;r&#xE9;cent&quot; avec Chrome, <a href="https://play.google.com/store/apps/details?id=com.chrome.canary&amp;hl=en">Chrome Canary</a>, <a href="https://play.google.com/store/apps/details?id=org.mozilla.fennec_aurora&amp;hl=en_US">Firefox Nightly</a>, et un cable usb</li>
+<li>Git</li>
 </ul>
 
     </google-codelab-step>
@@ -76,7 +76,7 @@ et d&apos;avoir au moins une fois contribu&#xE9; au d&#xE9;veloppement d&apos;un
     <h3 id="projet">Projet</h3><p>Clonez le code de d&#xE9;marrage depuis GitHub via la commande suivante :</p><pre><code class="language-bash">git clone https://github.com/noelmace/data-driven-pwa.git</code></pre><aside class="info">
   Vous pouvez &#xE9;galement le <a href="https://github.com/noelmace/data-driven-pwa/archive/master.zip">t&#xE9;l&#xE9;charger au format zip</a>, mais cela n&apos;est pas recommand&#xE9; pour ce codelab.
 </aside><h3 id="d&#xE9;pendances">D&#xE9;pendances</h3><p>Rendez-vous &#xE0; la racine du projet via la commande :</p><pre><code class="language-bash">cd data-driven-pwa</code></pre><p>Installez ensuite les d&#xE9;pendances du projet en lan&#xE7;ant la commande suivante :</p><pre><code class="language-bash">npm install</code></pre><aside class="special">
-  Cette commande lance l&apos;installation des outils de d&#xE9;veloppement depuis la racine du d&#xE9;p&#xF4;t, incluant [Lerna](https://lerna.js.org/). Ce dernier est ensuite utilis&#xE9; pour &#xE9;galement installer les d&#xE9;pendances de tous les sous-projets, &#xE0; partir desquels vous effectuerez les &#xE9;tapes suivantes. Par cons&#xE9;quent, <b>il ne vous sera pas n&#xE9;cessaire d&apos;effectuer un `npm install` pour chacun de ces projets</b>.
+  Cette commande lance l&apos;installation des outils de d&#xE9;veloppement depuis la racine du d&#xE9;p&#xF4;t, incluant <a bref="https://lerna.js.org/">Lerna</a>. Ce dernier est ensuite utilis&#xE9; pour &#xE9;galement installer les d&#xE9;pendances de tous les sous-projets, &#xE0; partir desquels vous effectuerez les &#xE9;tapes suivantes. Par cons&#xE9;quent, <b>il ne vous sera pas n&#xE9;cessaire d&apos;effectuer un <code>npm install</code> pour chacun de ces projets</b>.
 </aside>
 
     </google-codelab-step>
