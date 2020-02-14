@@ -48,7 +48,8 @@
 <li>Comment utiliser la synchronisation en arri&#xE8;re-plan (background sync) pour mettre &#xE0; jour l&apos;application, m&#xEA;me lorsque celle-ci n&apos;est pas affich&#xE9;e</li>
 <li>Utiliser la Notification API &#xE0; bon escient avec le Background Sync</li>
 <li>Bonnes pratiques de promotions de l&apos;installation d&apos;une Web App</li>
-<li>Gestion des partages</li>
+<li>Partages (Web Share API &amp; Web Share Target API)</li>
+<li>(Bonus) variables CSS et Media Queries Level 5</li>
 </ul><h3 id="pr&#xE9;-requis">Pr&#xE9;-requis</h3><p>Ce codelab requiert que vous soyez d&#xE9;j&#xE0; familier avec les &#xE9;l&#xE9;ments de base du d&#xE9;veloppement Web.</p><p>En particulier, il est recommand&#xE9; d&apos;avoir une certaine ma&#xEE;trise d&apos;HTML, de CSS et de JavaScript (i.e. ES2019),
 et d&apos;avoir au moins une fois contribu&#xE9; au d&#xE9;veloppement d&apos;une Web App (peu importe le framework ou la librairie utilis&#xE9;).</p><h3 id="important">IMPORTANT</h3><aside class="warning">
   <b>Dans le cas o&#xF9; vous assistiez &#xE0; une version &quot;live&quot; de ce codelab (durant une conf&#xE9;rence, comme le DevFest Paris 2020 par exemple), il vous est fortement recommand&#xE9; d&apos;effectuer les &#xE9;tapes 1 &#xE0; 3 en amont !</b>
@@ -88,7 +89,7 @@ et d&apos;avoir au moins une fois contribu&#xE9; au d&#xE9;veloppement d&apos;un
   
     <google-codelab-step label="Premier contact avec l'application">
 
-    <p>Via le terminal, rendez-vous dans le dossier &quot;project&quot; o&#xF9; se situent les &#xE9;l&#xE9;ments de base du projet :</p><pre><code class="language-bash">cd project</code></pre><p>&#xC0; partir de ce dossier, d&#xE9;marrez le serveur de d&#xE9;veloppement pour pouvoir utiliser et tester l&apos;application :</p><pre><code class="language-bash">npm run --silent start</code></pre><p>Ouvrez l&apos;application en entrant l&apos;url <a href="http://localhost:8081">localhost:8081</a> dans votre navigateur web.</p><p>L&apos;application vous demande alors une autorisation pour pouvoir afficher des notifications. Cliquez sur &quot;Autoriser&quot; ou &quot;Allow&quot; pour l&apos;accepter.</p><p><img src="https://codelabs.developers.google.com/codelabs/workbox-indexeddb/img/9ca6ac4aededfba6.png" alt="Autoriser les notifications"> \</p><aside class="special">
+    <p>Via le terminal, rendez-vous dans le dossier &quot;project&quot; o&#xF9; se situent les &#xE9;l&#xE9;ments de base du projet :</p><pre><code class="language-bash">cd project</code></pre><p>&#xC0; partir de ce dossier, d&#xE9;marrez le serveur de d&#xE9;veloppement pour pouvoir utiliser et tester l&apos;application :</p><pre><code class="language-bash">npm run --silent start</code></pre><p>Ouvrez l&apos;application en entrant l&apos;url <a href="http://localhost:8081">localhost:8081</a> dans votre navigateur web.</p><p>L&apos;application vous demande alors une autorisation pour pouvoir afficher des notifications. Cliquez sur &quot;Autoriser&quot; ou &quot;Allow&quot; pour l&apos;accepter.</p><p><img src="./assets/notifications.png" alt="Autoriser les notifications"> </p><aside class="special">
   Cette application est issue d&apos;un codelab de Google intitul&#xE9; <a href="https://codelabs.developers.google.com/codelabs/workbox-indexeddb/#2" target="_blank" rel="noopener noreferrer"><i>Build an offline-first, data-driven PWA</i></a>, sur lequel nous allons revenir au chapitre suivant.
 </aside><aside class="info">
   Portions of this page are modifications based on work created and <a href="/readme/policies/">shared by Google</a> and used according to terms described in the <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons 4.0 Attribution License</a>.
@@ -414,6 +415,27 @@ if (navigator.share) {
     }]);
   }
 });</code></pre><p>Relancez l&apos;application dans Chrome pour Android. Assurez vous bien, via les DevTools, que le manifest ne pr&#xE9;sente pas d&apos;erreur, et que main.js a &#xE9;t&#xE9; mis &#xE0; jour.</p><p>Installez l&apos;application (Menu &gt; Ajouter l&apos;application &#xE0; l&apos;&#xE9;cran d&apos;accueil).</p><p>Enfin, ouvrez l&apos;application de votre choix pour effectuer un partage (Chrome lui m&#xEA;me peut &#xEA;tre utilis&#xE9;), et s&#xE9;lectionnez &quot;WoF Codelab Demo&quot; comme cible. Une fois l&apos;application ouverte, assurez vous que le nouvel &#xE9;v&#xE8;nement a bien &#xE9;t&#xE9; cr&#xE9;&#xE9;.</p>
+
+    </google-codelab-step>
+  
+    <google-codelab-step label="(Optionnel) Mode sombre">
+
+    <p>Dans <strong>app/style/main.css</strong>, utilisez des <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties">variables CSS</a> pour d&#xE9;porter chaque d&#xE9;finition de couleur dans un fichier <strong>app/style/light.css</strong>.</p><p>Pour les m&#xEA;mes variables, d&#xE9;finissez les valeurs pour un mode sombre dans un fichier <strong>app/style/dark.css</strong>.</p><p>Utilisez ces trois fichiers et <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme"><code>prefers-color-scheme</code></a> pour d&#xE9;finir un mode &quot;light&quot; ou &quot;dark&quot; en fonction des pr&#xE9;f&#xE9;rences de l&apos;utilisateur, sur la base de l&apos;example suivant :</p><pre><code class="language-html">&lt;script&gt;
+  if (window.matchMedia(&apos;(prefers-color-scheme: dark)&apos;).media === &apos;not all&apos;) {
+    document.documentElement.style.display = &apos;none&apos;;
+    document.head.insertAdjacentHTML(
+        &apos;beforeend&apos;,
+        &apos;&lt;link rel=&quot;stylesheet&quot; href=&quot;style/light.css&quot; onload=&quot;document.documentElement.style.display = \&apos;\&apos;&quot;&gt;&apos;
+    );
+  }
+&lt;/script&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;style/dark.css&quot; media=&quot;(prefers-color-scheme: dark)&quot;&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;style/light.css&quot; media=&quot;(prefers-color-scheme: no-preference), (prefers-color-scheme: light)&quot;&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;style/main.css&quot;&gt;</code></pre><aside class="tip">
+  Cet exemple est inspir&#xE9; de l&apos;excellent article <a href="https://web.dev/prefers-color-scheme/">prefers-color-scheme: Hello darkness, my old friend</a>. Sa lecture pourra vous aider &#xE0; accomplir cet exercice et mieux comprendre ses tenant et aboutissant.
+</aside><p>Enfin, vous pouvez ajouter un bouton toggle dans le header afin de permettre &#xE0; l&apos;utilisateur de changer de mode dynamiquement. Pensez &#xE0; sauvegarder cette pr&#xE9;f&#xE9;rence via un cookie.</p><aside class="tip">
+  Pour une correction ult&#xE9;rieure, n&apos;h&#xE9;sitez pas &#xE0; enregistrer cette derni&#xE8;re &#xE9;tape dans votre propre fork du projet, et &#xE0; cr&#xE9;er une Pull Request.
+</aside>
 
     </google-codelab-step>
   
