@@ -45,13 +45,13 @@ Feel free to suggest modifications by clicking on the "Edit page" link that you 
   - :man_technologist: :octocat:/[noelmace/slides-modern-vanilla](https://github.com/noelmace/slides-modern-vanilla)
   - made with [**deckdeckgo**](http://deckdeckgo.com/)
 - **reveal**: (deprecated) slides made with RevealJS
-  - :man_teacher: [next.wof.show](http://next.wof.show/slides/reveal/)
-  - :man_technologist: [slides/reveal](./slides/reveal)
+  - :man_teacher: [next.wof.show](http://next.wof.show/web/slides-reveal/)
+  - :man_technologist: [web/slides-reveal](./web/slides-reveal)
 
 ## Codelabs
 
 - :man_teacher: [next.wof.show](http://next.wof.show/codelabs/)
-- :man_technologist: [packages/codelabs](./packages/codelabs)
+- :man_technologist: [web/codelabs](./web/codelabs)
 - made with [Google Codelab Tools](https://github.com/googlecodelabs/tools)
 
 ## Experiments/Demos

@@ -1,6 +1,6 @@
 {
   "packages": [
-    "slides/reveal",
+    "web/slides-reveal",
     "misc/perf",
     "packages/*",
     "docs"
