@@ -1,7 +1,9 @@
 {
   "packages": [
     "web/slides-reveal",
-    "misc/perf",
+    "web/codelabs",
+    "projects/perf-tests",
+    "projects/data-driven-pwa",
     "packages/*",
     "docs"
   ],
