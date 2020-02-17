@@ -1,4 +1,4 @@
-# WoF Flashcards
+# Flashcards
 
 A long time ago, I took the habit to write
 [flashcards](https://en.wikipedia.org/wiki/Flashcard) every time I prepare some
@@ -16,6 +16,7 @@ and links with my learning materials. We'll see.
 
 ## Template
 
+```html
 <details>
 <summary>Question?</summary>
 <p>
@@ -24,11 +25,8 @@ Answer!
 
 </p>
 </details>
+```
 
-## License
+## Topics
 
-Copyright © 2019 Noël Macé (noelmace.com).
-This work is licensed under a
-<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
-Creative Commons Attribution-ShareAlike 4.0 International License
-</a>.
+- [Web Components](/flashcards/webcomponents)
