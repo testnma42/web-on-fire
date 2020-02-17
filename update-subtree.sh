@@ -3,7 +3,7 @@ set -e
 
 # inspired by https://github.com/xedi/action-subtree-sync
 
-PACKAGES=('packages/data-driven-pwa')
+PACKAGES=('projects/data-driven-pwa')
 REPOS=('noelmace/data-driven-pwa')
 
 NBR_PACKAGES=${#PACKAGES[@]}
@@ -47,7 +47,7 @@ for (( i=0; i<${NBR_PACKAGES}; i++ )); do
     git clone github:"$repo" /tmp/split/$repo --bare
 
     echo "Create the release split branch"
-    git subtree split --prefix="packages/data-driven-pwa" --squash -b split
+    git subtree split --prefix="projects/data-driven-pwa" --squash -b split
 
     echo "Push to the split directory"
     git push /tmp/split/$repo split:master
