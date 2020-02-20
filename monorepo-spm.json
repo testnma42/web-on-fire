@@ -1,0 +1,9 @@
+{
+  "projects": [
+    {
+      "name": "data-driven-pwa",
+      "directory": "packages/data-driven-pwa",
+      "url": "git@github.com:noelmace/data-driven-pwa.git"
+    }
+  ]
+}
