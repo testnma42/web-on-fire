@@ -47,7 +47,7 @@ for (( i=0; i<${NBR_PACKAGES}; i++ )); do
     git clone github:"$repo" /tmp/split/$repo --bare
 
     echo "Create the release split branch"
-    git subtree split --prefix="projects/data-driven-pwa" --squash -b split
+    git subtree split --prefix="${pkg}" --squash -b split
 
     echo "Push to the split directory"
     git push /tmp/split/$repo split:master
